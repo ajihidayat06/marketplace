@@ -1,0 +1,128 @@
+.navigasi {
+    color: white;
+    width: 80px;
+    text-align: center;
+    margin-right: 15px;
+}
+
+footer {
+    width: 100%;
+    background-color: black;
+    height: 100px;
+    color: white;
+    padding-top: 15px;
+}
+
+.logo {
+    height: 45px;
+    width: 40px;
+}
+
+.logo-login {
+    text-align: center;
+}
+
+.top-box {
+    width: 100%;
+    min-height: 400px;
+}
+
+.top-box img {
+    max-height: 350px;
+}
+
+.top-isi {
+    float: left;
+    width: 50%;
+}
+
+.login-box {
+    width: 400px;
+    min-height: 400px;
+    margin: 50px auto;
+}
+
+.tengah {
+    margin: 0 auto;
+}
+
+hr {
+    border: 1px solid;
+}
+
+.form-isi {
+    margin: 20px auto;
+
+}
+
+.kategori-wrapper {
+    width: 100%;
+    margin: 50px 0;
+    padding-bottom: 50px;
+    text-align: center;
+}
+
+.kategori {
+    float: left;
+    width: 12.5%;
+    margin-bottom: 30px;
+}
+
+.margin-konten {
+    min-height: 400px;
+    margin: 20px 20px 20px 20px;
+
+}
+
+.box-konten {
+    float: left;
+    width: 25%;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.isi-konten {
+    width: 80%;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    margin: 0 auto;
+}
+
+.pengaturan-isi {
+    float: left;
+}
+
+.lebar-a {
+    width: 25%;
+    min-height: 400px;
+}
+
+.lebar-b {
+    width: 75%;
+}
+
+.menusamping {
+    width: 100%;
+    text-align: left;
+    padding: 5px 10px;
+}
+
+.menusamping a {
+    text-decoration: none;
+}
+
+.tombol {
+    width: 100%;
+    padding: inherit;
+    color: black;
+    display: inline-block;
+    opacity: 0.8;
+    /* Ubah nilai border-radius ke 4px */
+    border-radius: 4px;
+    background-color: transparent;
+    transition: 0.3s;
+}
+
+.tombol:hover {
+    background-color: cornflowerblue;
+    color: white;
+}
