@@ -20,7 +20,7 @@ class CreateBarangsTable extends Migration
             $table->double('barang_harga');
             $table->integer('barang_jumlah');
             $table->string('barang_image');
-            $table->string('barang_status');
+            $table->string('barang_status')->nullable();
             $table->foreignId('user_id')->constrained();
             $table->foreignId('kategori_id')->constrained();
             $table->timestamps();

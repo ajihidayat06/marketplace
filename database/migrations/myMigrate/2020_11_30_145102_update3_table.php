@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateKategorisTable extends Migration
+class Update3Table extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,9 @@ class CreateKategorisTable extends Migration
      */
     public function up()
     {
-        Schema::create('kategoris', function (Blueprint $table) {
-            $table->id();
-            $table->string('kategori_nama');
-            $table->boolean('kategori_status');
-            $table->timestamps();
+        //
+        Schema::table('sewas', function(Blueprint $table){
+            $table->foreignId('pemilik_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 
@@ -28,6 +26,9 @@ class CreateKategorisTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('kategoris');
+        //
+        Schema::table('sewas', function(Blueprint $table){
+            $table->dropColumn('pemilik_id');
+        });
     }
 }

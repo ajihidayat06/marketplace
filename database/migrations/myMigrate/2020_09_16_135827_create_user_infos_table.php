@@ -15,19 +15,18 @@ class CreateUserInfosTable extends Migration
     {
         Schema::create('user_infos', function (Blueprint $table) {
             $table->id();
-            $table->string('user_nama_lengkap');
-            $table->string('user_email');
             $table->string('user_telp');
-            $table->string('user_bank');
-            $table->string('user_rek');
-            $table->string('user_KTP');
-            $table->string('user_foto_ktp');
-            $table->string('user_image');
+            $table->string('user_bank')->nullable();
+            $table->string('user_rek')->unique()->nullable();
+            $table->string('user_KTP')->unique()->nullable();
+            $table->string('user_foto_ktp')->nullable();
+            $table->string('user_image')->nullable();
             $table->string('user_alamat');
-            $table->string('user_provinsi');
-            $table->string('user_kabupaten');
-            $table->string('user_kecamatan');
-            $table->string('user_kelurahan');
+            $table->string('user_provinsi')->nullable();
+            $table->string('user_kabupaten')->nullable();
+            $table->string('user_kecamatan')->nullable();
+            $table->string('user_kelurahan')->nullable();
+            $table->timestamp('akun_verified_at')->nullable();
             $table->foreignId('user_id')->constrained();
             $table->timestamps();
         });

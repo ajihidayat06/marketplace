@@ -4,10 +4,16 @@ namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use App\User;
+use App\User_info;
 
 
 class AuthController extends Controller
 {
+    public function __construct()
+    {
+        session(['role' => 'renter']);
+    }
     public function login()
     {
         return view('auths.login');
@@ -16,7 +22,7 @@ class AuthController extends Controller
     public function postlogin(Request $request)
     {
         $this->validate($request, [
-            'username' => 'required|string',
+            'username' => 'required|string|',
             'password' => 'required|string|min:6',
         ]);
 
@@ -28,9 +34,14 @@ class AuthController extends Controller
         ];
 
         if (Auth::attempt($login)) {
-            return redirect('/pengaturan');
+            if (Auth::user()->role == 'admin'){
+
+                return redirect('/dashboard');
+            }else{
+                return redirect('/'); 
+            }
         }
-        return redirect('/masuk')->with(['error' => 'Email/Password salah!']);;
+        return redirect('/login')->with(['error' => 'Email/Password salah!']);
     }
     public function logout()
     {
@@ -53,6 +64,27 @@ class AuthController extends Controller
             'password' => ['required', 'string', 'min:6', 'confirmed'],
         ]);
 
-        return "berhasil daftar";
+        // User::create([
+        //     'nama' => $request->nama,
+        //     'username'=> $request->username,
+        //     'email' => $request->email,
+        //     'password'=> bcrypt($request->password),
+        //     'role' => 'renter'
+        // ]);
+        // User_info::create([
+        //     'user_id' => User::id()
+        // ]);
+        $user = new User;
+        $user->nama = $request->nama;
+        $user->username = $request->username;
+        $user->email = $request->email;
+        $user->password = bcrypt($request->password);
+        $user->role = 'user';
+        $user->save();
+            // return $user->id;
+        $user_info = new User_info;
+        $user_info->user_id = $user->id;
+        $user_info->save();
+        return redirect('/login');
     }
 }

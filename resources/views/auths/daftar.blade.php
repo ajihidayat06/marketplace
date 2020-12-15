@@ -18,29 +18,54 @@
             {{ csrf_field() }}
             <div class="form-group row">
                 <label for="nama">Nama Lengkap</label>
-                <input class="form-control @error('nama') is-invalid @enderror" name="nama_lengkap" type="text" id="nama">
+                <input class="form-control @error('nama') is-invalid @enderror" name="nama" type="text" id="nama">
                 @error('nama')
                     <span class="alert alert-danger">
-                    <strong>Nama Lengkap belum diisi</strong>
+                    <strong>{{ $message }}</strong>
                     </span>
                 @enderror
             </div>
+
             <div class="form-group row">
                 <label for="username">Username</label>
-                <input class="form-control" name="username" type="text" id="username">
+                <input class="form-control @error('username') is-invalid @enderror" name="username" type="text" id="username">
+                @error('username')
+                    <span class="alert alert-danger">
+                    <strong>{{ $message }}</strong>
+                    </span>
+                @enderror
             </div>
+
             <div class="form-group row">
                 <label for="email">Email</label>
-                <input class="form-control" name="email" type="email" id="email">
+                <input class="form-control @error('email') is-invalid @enderror" name="email" type="email" id="email">
+                @error('email')
+                    <span class="alert alert-danger">
+                    <strong>{{ $message }}</strong>
+                    </span>
+                @enderror
             </div>
+            
             <div class="form-group row">
                 <label for="password">Password</label>
-                <input class="form-control" name="password" type="password" id="password">
+                <input class="form-control @error('password') is-invalid @enderror" name="password" type="password" id="password">
+                @error('password')
+                    <span class="alert alert-danger">
+                    <strong>{{ $message }}</strong>
+                    </span>
+                @enderror
             </div>
+
             <div class="form-group row">
                 <label for="konfirmpassword">Konfirmasi Password</label>
-                <input class="form-control" name="password_confirmation" type="password" id="konfirmpassword">
+                <input class="form-control @error('password_confirmation') is-invalid @enderror" name="password_confirmation" type="password" id="konfirmpassword">
+                @error('password_confirmation')
+                    <span class="alert alert-danger">
+                    <strong>{{ $message }}</strong>
+                    </span>
+                @enderror
             </div>
+            
             <div class="row ">
                 <button type="submit" class="form-control btn btn-primary tengah">Daftar</button>
             </div>

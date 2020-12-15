@@ -1,8 +1,22 @@
 .navigasi {
     color: white;
+    min-width: 80px;
+    text-align: center;
+    margin-right: 10px;
+}
+
+.navigasi1 {
+    color: white;
+    background-color: #D40887;
     width: 80px;
     text-align: center;
     margin-right: 15px;
+}
+
+,
+.navigasi1:hover {
+    background-color: #650AF6;
+    text-decoration: none;
 }
 
 footer {
@@ -11,6 +25,7 @@ footer {
     height: 100px;
     color: white;
     padding-top: 15px;
+    position: absolute;
 }
 
 .logo {
@@ -27,7 +42,12 @@ footer {
     min-height: 400px;
 }
 
-.top-box img {
+.top-box-admin {
+    width: 100%;
+    min-height: 500px;
+}
+
+.gambar {
     max-height: 350px;
 }
 
@@ -46,13 +66,17 @@ footer {
     margin: 0 auto;
 }
 
+.tengah-ver {
+    margin: auto 0;
+}
+
 hr {
-    border: 1px solid;
+    border-top: 1px solid black;
 }
 
 .form-isi {
     margin: 20px auto;
-
+    border-color: #D40887;
 }
 
 .kategori-wrapper {
@@ -93,11 +117,16 @@ hr {
 
 .lebar-a {
     width: 25%;
+    height: auto;
+    padding-bottom: 50px;
     min-height: 400px;
 }
 
 .lebar-b {
     width: 75%;
+    height: auto;
+    padding-bottom: 50px;
+    position: relative;
 }
 
 .menusamping {
@@ -106,11 +135,12 @@ hr {
     padding: 5px 10px;
 }
 
+
 .menusamping a {
     text-decoration: none;
 }
 
-.tombol {
+.tombol-side {
     width: 100%;
     padding: inherit;
     color: black;
@@ -122,7 +152,275 @@ hr {
     transition: 0.3s;
 }
 
-.tombol:hover {
-    background-color: cornflowerblue;
+.tombol-side:hover {
+    background-color: #650AF6;
     color: white;
+}
+
+.profil_image {
+    max-height: 180px;
+
+}
+
+.tombol-konten {
+    min-width: 50px;
+    padding: 5px 10px;
+    display: inline-block;
+    opacity: 0.8;
+    border: 1px solid;
+    /* Ubah nilai border-radius ke 4px */
+    border-radius: 10px;
+    background-color: transparent;
+    transition: 0.3s;
+}
+
+.tombol-nav {
+    min-width: 50px;
+    padding: 5px 10px;
+    display: inline-block;
+    opacity: 0.8;
+    text-align: center;
+    /* Ubah nilai border-radius ke 4px */
+    border-radius: 10px;
+    background-color: transparent;
+    transition: 0.3s;
+}
+
+.merah {
+    color: #F60A27;
+    border-color: #F60A27;
+    background-color: white;
+}
+
+.merah:hover {
+    color: white;
+    background-color: #F60A27;
+    text-decoration: none;
+}
+
+.pink {
+    color: #D40887;
+    border-color: #D40887;
+    background-color: white;
+}
+
+.pink:hover {
+    color: white;
+    background-color: #D40887;
+    text-decoration: none;
+}
+
+.ungu {
+    color: #DD16EB;
+    border-color: #DD16EB;
+    background-color: white;
+}
+
+.ungu:hover {
+    color: white;
+    background-color: #DD16EB;
+    text-decoration: none;
+}
+
+.utu {
+    color: #8F08D4;
+    border-color: #8F08D4;
+    background-color: white;
+}
+
+.utu:hover {
+    color: white;
+    background-color: #8F08D4;
+    text-decoration: none;
+}
+
+.biru {
+    color: #650AF6;
+    border-color: #650AF6;
+    background-color: white;
+}
+
+.biru:hover {
+    color: white;
+    background-color: #650AF6;
+    text-decoration: none;
+}
+
+.ungu-biru {
+    color: white;
+    border-color: #DD16EB;
+    background-color: #DD16EB;
+}
+
+.ungu-biru:hover {
+    color: white;
+    background-color: #650AF6;
+    border-color: #650AF6;
+    text-decoration: none;
+}
+
+.hijau {
+    color: #078a32;
+    border-color: #078a32;
+    background-color: white;
+}
+
+.hijau:hover {
+    color: white;
+    background-color: #078a32;
+    text-decoration: none;
+}
+
+.tombol-role {
+    width: 100%;
+    padding: 5px 10px;
+    display: inline-block;
+    opacity: 0.8;
+    border: 1px solid;
+    /* Ubah nilai border-radius ke 4px */
+    border-radius: 20px;
+    background-color: transparent;
+}
+
+.tombol-role-isi {
+    min-width: 50px;
+    padding: 0px 5px;
+    display: inline-block;
+    opacity: 0.8;
+    border: 1px solid;
+    /* Ubah nilai border-radius ke 4px */
+    border-radius: 10px;
+    background-color: transparent;
+    transition: 0.3s;
+}
+
+.tombol-role-isi:hover {
+    text-decoration: none;
+    color: white;
+}
+
+.sidenav {
+    height: 100%;
+    position: fixed;
+    z-index: 1;
+    top: 0px;
+    left: 0;
+    /* background-image: linear-gradient(to bottom, #0C65F0, #00DCF0); */
+    background-color: #0C65F0;
+    overflow-x: hidden;
+    padding-top: 20px;
+}
+
+.tombol-sideadmin,
+.dropdown-btn {
+    width: 100%;
+    padding: inherit;
+    color: white;
+    text-align: left;
+    display: inline-block;
+    /* Ubah nilai border-radius ke 4px */
+    border-radius: 4px;
+    background-color: transparent;
+    transition: 0.3s;
+    text-decoration: none;
+    border: none;
+    background: none;
+    cursor: pointer;
+    outline: none;
+}
+
+.active {
+    background-color: white;
+    color: #0C65F0;
+}
+
+.tombol-sideadmin:hover {
+    background-color: white;
+    color: #0C65F0;
+}
+
+.dropdown-container {
+    display: none;
+    padding: inherit;
+    border-radius: 4px;
+    transition: 0.3s;
+    background-color: #0C65F0;
+    padding-left: 8px;
+}
+
+.cardUmum {
+    color: black;
+}
+
+.gambar_detail {
+    width: 640px;
+    height: 500px;
+}
+
+.btn-circle.btn-sm {
+    width: 30px;
+    height: 30px;
+    padding: 6px 0px;
+    border-radius: 15px;
+    font-size: 8px;
+    text-align: center;
+}
+
+.btn-md-sewa {
+    width: 100%;
+    height: 45px;
+    padding: 10px 0px;
+    border-radius: 25px;
+    font-size: 15px;
+    text-align: center;
+}
+
+.gambar_sewaa {
+    width: 100px;
+    height: 100px;
+}
+
+.nav-pengaturan a {
+    display: inline-block;
+    width: 100%;
+    font-size: 14pt;
+    height: 35px;
+    line-height: 35px;
+    text-decoration: none;
+    color: rgb(112, 109, 109);
+    border-radius: 5px;
+}
+
+.nav-pengaturan a:hover {
+    color: #650AF6;
+    text-decoration: none;
+    border-bottom: 2px solid #650AF6;
+}
+
+.nav-pengaturan.active a {
+    color: #650AF6;
+    text-decoration: none;
+    border-bottom: 2px solid #650AF6;
+}
+
+.header-kartu {
+    margin: 0 1px;
+    height: 30px;
+    line-height: 30px;
+    background-color: ;
+    border-bottom: 1px solid rgb(204, 204, 204);
+    border-radius: 3px;
+}
+
+.footer-kartu {
+    margin: 0 1px;
+    height: 50px;
+    line-height: 30px;
+    background-color: ;
+    border-top: 1px solid rgb(204, 204, 204);
+    border-radius: 3px;
+}
+
+.my-active {
+    display: none;
 }
