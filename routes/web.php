@@ -145,3 +145,6 @@ Route::prefix('transaksi_ditolak')->middleware(['auth','cekrole:admin'])->group(
 Route::prefix('laporan_transaksi_admin')->middleware(['auth','cekrole:admin'])->group(function () {
     Route::get('/cetak_pdf/{daterange}', 'LaporanTransaksiAdminController@cetak')->name('catak_laporan');
 });
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
