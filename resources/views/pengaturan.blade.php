@@ -22,29 +22,32 @@
             
         </div>
         <div class="col-md-10 border-left" style="min-height: 500px">
-            <div style="height: 200px;">
-                <img class="profil_image col-sm-4 pengaturan-isi" src="{{ asset('img/utama1.jpeg') }} " alt="">
-                <span class="col-sm-8 pengaturan-isi mt-5">
+            <div class="row" style="height: 200px;">
+                <div class="col-md-4 mx-auto">
+                    <img class="rounded-circle" src="{{ Auth::User()->user_info->getAvatar() }} " style="height: 200px; width: 200px" alt="">
+                </div>
+                
+                <div class="col-sm-8 pengaturan-isi mt-5">
                     <div>
-                        <H2 style="color:#DD16EB">{{ Auth::User()->nama }} </H2>
+                        <H2 style="color:#11647A">{{ Auth::User()->nama }} </H2>
                     </div>
                     <div>
-                        <span style="color: #D40887">{{ Auth::User()->email }}</span>
+                        <span class="text-secondary">{{ Auth::User()->email }}</span>
                     </div>
-                    <div class="mt-2">
+                    <div class="my-auto">
                         @if ($info->user_foto_ktp==null)
-                            <i class="fas fa-exclamation-triangle" style="color: #D40887"></i>
-                            <a href="/pengaturan/verifikasi_akun" class="tombol-konten utu">verifikasi akun</a>
+                            <i class="fas fa-exclamation-triangle text-warning"></i>
+                            <a href="/pengaturan/verifikasi_akun" class="col-md-3 btn btn-circle btn-md-sewa btn-info">verifikasi akun</a>
                         @elseif($info->user_foto_ktp!=null &&  $info->user->akun_verified_at==null)
-                            <i class="fas fa-hourglass-half" style="color:#DD16EB"></i>
+                            <i class="fas fa-hourglass-half" style="color:#11647A"></i>
                             <span class="font-weight-light">Verifikasi akun sedang diproses</span>
                         @else
-                        <i class="fas fa-user-check" style="color:#DD16EB"></i>
-                        <span class="font-weight-light">Akun terverifikasi</span>
+                        <i class="fas fa-user-check text-success"></i>
+                        <span class="font-weight-normal text-success">Akun terverifikasi</span>
                         @endif
                         
                     </div>
-                </span>
+                </div>
             </div>
             <div class="mt-3">
                 <ul class="nav nav-tabs text-center" id="myTab" role="tablist">

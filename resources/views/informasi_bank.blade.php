@@ -17,20 +17,20 @@
             
         </div>
         <div class="col-md-8 border-left">
-            <h4 class="mb-3">Informasi Bank</h4>
+            <h4 class="mb-3" style="color: #11647A">Informasi Bank</h4>
 
             <div class="top-box">
                 <div class="row">
                     <div class="col-md-3">
-                        <p style="color: #DD16EB">No.Rekening</p>
-                        <p style="color: #DD16EB">Nama Bank</p>
+                        <p style="color: #1A97BA">No.Rekening</p>
+                        <p style="color: #1A97BA">Nama Bank</p>
                     </div>
                     <div class="col-md-3">
                         <p style="">{{ $info_bank->user_rek }}</p>
                         <p style="">{{ $info_bank->user_bank }}</p>
                     </div>
                 </div>
-                <button type="button" class="btn pink mt-3" data-toggle="modal" data-target="#editbank">Edit Informasi Bank</button>
+                <button type="button" class="btn btn-info mt-3" data-toggle="modal" data-target="#editbank">Edit Informasi Bank</button>
             </div>
         </div>
     </div>
@@ -39,7 +39,7 @@
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLongTitle">Edit Informasi Bank</h5>
+                <h5 class="modal-title" id="exampleModalLongTitle" style="color: #11647A">Edit Informasi Bank</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -49,8 +49,8 @@
                             {{ csrf_field() }}
                             <div class="row">
                                 <div class="form-isi col-md-6">
-                                    <label for="rekening" style="color: #DD16EB">No.Rekening</label>
-                                    <input style="border-color:#DD16EB;" name="rekening" class="form-control @error('rekening') is-invalid @enderror" type="text" id="rekening" placeholder="Masukan Nomor Rekening ">
+                                    <label for="rekening" class="text-dark">No.Rekening</label>
+                                    <input  name="rekening" class="form-control @error('rekening') is-invalid @enderror" type="text" id="rekening" placeholder="Masukan Nomor Rekening ">
                                     @error('rekening')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -58,8 +58,8 @@
                                     @enderror
                                 </div>
                                 <div class="form-isi col-md-6">
-                                    <label for="nama_bank" style="color: #DD16EB">Nama Bank</label>
-                                    <input style="border-color:#DD16EB;" name="nama_bank" class="form-control @error('nama_bank') is-invalid @enderror" type="text" id="nama_bank" placeholder="Masukan Nama Bank">
+                                    <label for="nama_bank" class="text-dark">Nama Bank</label>
+                                    <input name="nama_bank" class="form-control @error('nama_bank') is-invalid @enderror" type="text" id="nama_bank" placeholder="Masukan Nama Bank">
                                     @error('nama_bank')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>

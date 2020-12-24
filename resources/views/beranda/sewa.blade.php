@@ -116,26 +116,26 @@
                     <div class="card-body">
                         <div class="font-weight-light">
                             <label class="col-md-6" for="">Harga Sewa/Unit</label>
-                            <span class="col-md-2 offset-2">Rp {{$item->barang_harga}}</span>
+                            <span class="col-md-2 offset-1">Rp {{$item->barang_harga}}</span>
                         </div>
                         <div class="font-weight-light">
                             <label class="col-md-6" for="">Banyak Sewa (Unit)</label>
-                            <span class="col-md-2 offset-2">{{$detail_jumlah}}</span>
+                            <span class="col-md-2 offset-1">{{$detail_jumlah}}</span>
                         </div>
                         <div class="font-weight-light">
                             <label class="col-md-6" for="">Lama Sewa (Hari)</label>
-                            <input class="col-md-2 offset-2 border-0" style="color: grey" type="text" name="sewa_lama_hari" readonly id="lama_sewa" value="{{$jumlah_hari}}">
+                            <input class="col-md-2 offset-1 border-0" style="color: grey" type="text" name="sewa_lama_hari" readonly id="lama_sewa" value="{{$jumlah_hari}}">
                         </div>
                         <div class="font-weight-light">
                             <label class="col-md-4" for="">Biaya Layanan</label>
-                            <span class="col-md-4 offset-4" style="color: grey"> Rp
+                            <span class="col-md-4 offset-3" style="color: grey"> Rp
                             <input class="border-0 biaya_layanan" style="color: grey; width: 75px" type="text" name="sewa_biaya_layanan" readonly id="biaya_layanan" value="2500">
                         </div>
                         
                         <hr style="border-top: 1px solid black">
                         <div class="font-weight-bold">
                             <label class="col-md-4" for="">Total Harga</label>
-                            <span class="col-md-4 offset-4" style="color: #DD16EB"> Rp 
+                            <span class="col-md-4 offset-3" style="color: #DD16EB"> Rp 
                                 <input class=" border-0" style="color: #DD16EB; width: 75px" type="text" name="sewa_total_harga" readonly id="total_harga" value="">
                             </span>
                         </div>

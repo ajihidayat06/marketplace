@@ -13,7 +13,7 @@
     margin-right: 15px;
 }
 
-,
+
 .navigasi1:hover {
     background-color: #650AF6;
     text-decoration: none;
@@ -153,7 +153,7 @@ hr {
 }
 
 .tombol-side:hover {
-    background-color: #650AF6;
+    background-color: #1A97BA;
     color: white;
 }
 
@@ -407,7 +407,7 @@ hr {
     margin: 0 1px;
     height: 30px;
     line-height: 30px;
-    background-color: ;
+
     border-bottom: 1px solid rgb(204, 204, 204);
     border-radius: 3px;
 }
@@ -416,7 +416,7 @@ hr {
     margin: 0 1px;
     height: 50px;
     line-height: 30px;
-    background-color: ;
+
     border-top: 1px solid rgb(204, 204, 204);
     border-radius: 3px;
 }

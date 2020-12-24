@@ -11,7 +11,7 @@
     @include('layout.admin.adminsidebar')
     <div class="top-box-admin">
         <div class="col-md-10 offset-md-2">
-            <h3 class="mb-5">Transaksi Diterima</h3>
+            <h3 class="mb-5">Transaksi Ditolak</h3>
             {{-- <button type="button" class="btn btn-success mb-3" data-toggle="modal" data-target="#tambahstatus">Tambah Status</button> --}}
                 <table class="table table-hover">
                     <thead>

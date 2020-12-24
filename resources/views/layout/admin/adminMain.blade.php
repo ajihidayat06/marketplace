@@ -26,6 +26,7 @@
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    @yield('script')
 </body>
 
 </html>

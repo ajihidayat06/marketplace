@@ -43,14 +43,24 @@
 
         @guest
         
-            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            {{-- <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                 <div class="navbar-nav" style="margin-left: auto">
                     <a style="font-weight: bold" class="navigasi tombol-konten pink rounded" href="/login">Masuk <span class="sr-only">(current)</span></a>
                     <a style="font-weight: bold;" class="navigasi1 tombol-konten utu rounded" href="/register">Daftar</a>
         
                         <a style="color: #650AF6; width: 80px; text-align: center; font-weight: bold;" class="nav-link" href="#">Bantuan</a>
                 </div>
-            </div>
+            </div> --}}
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                </li>
+                @if (Route::has('register'))
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                    </li>
+                @endif
+            </ul>
         @endguest
 </nav>
 

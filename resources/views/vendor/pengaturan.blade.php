@@ -22,29 +22,31 @@
             
         </div>
         <div class="col-md-10 border-left">
-            <div style="height: 200px;">
-                <img class="profil_image col-sm-4 pengaturan-isi" src="{{ asset('img/utama1.jpeg') }} " alt="">
-                <span class="col-sm-8 pengaturan-isi mt-5">
+            <div class="row">
+                <div class="col-md-4">
+                    <img class="rounded-circle" src="{{ Auth::User()->user_info->getAvatar() }} " style="height: 200px; width: 200px" alt="">
+                </div>
+                <div class="col-sm-8 pengaturan-isi mt-5">
                     <div>
-                        <H2 style="color:#DD16EB">{{ Auth::User()->nama }} </H2>
+                        <H2 style="color:#11647A">{{ Auth::User()->nama }} </H2>
                     </div>
                     <div>
-                        <span style="color: #D40887">{{ Auth::User()->email }}</span>
+                        <span class="text-secondary">{{ Auth::User()->email }}</span>
                     </div>
-                    <div class="mt-2">
+                    <div class="my-auto">
                         @if ($info->user_foto_ktp==null)
-                            <i class="fas fa-exclamation-triangle" style="color: #D40887"></i>
-                            <a href="/pengaturan/verifikasi_akun" class="tombol-konten utu">verifikasi akun</a>
+                            <i class="fas fa-exclamation-triangle text-warning"></i>
+                            <a href="/pengaturan/verifikasi_akun" class="col-md-3 btn btn-circle btn-md-sewa btn-info">verifikasi akun</a>
                         @elseif($info->user_foto_ktp!=null &&  $info->user->akun_verified_at==null)
-                            <i class="fas fa-hourglass-half" style="color:#DD16EB"></i>
+                            <i class="fas fa-hourglass-half" style="color:#11647A"></i>
                             <span class="font-weight-light">Verifikasi akun sedang diproses</span>
                         @else
-                        <i class="fas fa-user-check" style="color:#DD16EB"></i>
-                        <span class="font-weight-light">Akun terverifikasi</span>
+                        <i class="fas fa-user-check text-success"></i>
+                        <span class="font-weight-normal text-success">Akun terverifikasi</span>
                         @endif
                         
                     </div>
-                </span>
+                </div>
             </div>
             <div class="mt-3">
                 <ul class="nav nav-tabs text-center" id="myTab" role="tablist">
@@ -88,7 +90,7 @@
                                             <span class="text-danger">{{$item_permintaan_sewa->sewa_tanggal_mulai}}</span>
                                             <div class="row mt-3 mb-3">
                                                 <div class="col-md-5 offset-1">
-                                                    {{-- <a href="#" class="btn btn-outline-danger btn-circle btn-md-sewa text-capitalize">Tolak Sewa</a> --}}
+                                                    
                                                     <button type="button" class="btn btn-outline-danger btn-circle btn-md-sewa text-capitalize" data-toggle="modal" data-target="#tolakpermintaansewa">
                                                         Tolak Sewa
                                                     </button>
@@ -105,7 +107,7 @@
                                 </div>
                             </div>
                             
-                            {{-- modal tolak --}}
+                            
                             <div class="modal fade" id="tolakpermintaansewa" tabindex="-1" role="dialog" aria-labelledby="tolakpermintaansewa" aria-hidden="true">
                                 <div class="modal-dialog modal-dialog-centered" role="document">
                                     <div class="modal-content">
@@ -134,7 +136,7 @@
                                 </div>
                             </div>
 
-                            {{-- modal terima --}}
+                            
                             <div class="modal fade" id="terimapermintaansewa" tabindex="-1" role="dialog" aria-labelledby="terimapermintaansewa" aria-hidden="true">
                                 <div class="modal-dialog modal-dialog-centered" role="document">
                                     <div class="modal-content">
@@ -193,18 +195,7 @@
                                                     <strong>{{$item_permintaan_sewa->sewa_kode_booking}}</strong>
                                                 </span>
                                             </div>
-                                            {{-- <div class="row mt-3 mb-3">
-                                                <div class="col-md-5 offset-1">
-                                                    <button type="button" class="btn btn-outline-danger btn-circle btn-md-sewa text-capitalize" data-toggle="modal" data-target="#tolakpermintaansewa">
-                                                        Tolak Sewa
-                                                    </button>
-                                                </div>
-                                                <div class="col-md-5">
-                                                    <button type="button" class="btn btn-success btn-circle btn-md-sewa text-capitalize" data-toggle="modal" data-target="#terimapermintaansewa">
-                                                        Terima Sewa
-                                                    </button>
-                                                </div>
-                                            </div> --}}
+                                            
                                         </div>
                                     </div>
                                     
@@ -335,19 +326,7 @@
                                                 </div>
                                             
                                         </div>
-                                        {{-- <div class="mt-3">
-                                            <span class="text-capitalize text-danger">*note:</span>
-                                            <p class="">- Silahkan lakukan <span class="text-danger text-capitalize">konfirmasi pengembalian barang</span> jika anda 
-                                            sudah menerima barang anda kembali dari penyewa.
-                                            </p>
-                                        </div> --}}
-                                        {{-- <div class="mb-3">
-                                            <form action="{{route('konfirmasi_pengembalian_barang', ['id' => $riwayat->id])}}" method="POST">
-                                                @csrf
-                                                @method('PUT')
-                                                <button type="submit" class="col-md-10 offset-1 btn btn-circle btn-md-sewa btn-outline-primary">Konfirmasi pengembalian Barang</button>
-                                            </form>
-                                        </div> --}}
+                                        
                                     </div>
                                 </div>
                                 

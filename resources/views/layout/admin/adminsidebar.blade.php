@@ -42,9 +42,9 @@
     {{-- <div class="menusamping border-bottom">
         <a href="{{ route('admin_konfirmasi_pembayaran')}}" class="tombol-sideadmin">Konfirmasi Pembayaran</a>
     </div> --}}
-    <div class="menusamping mt-4">
+    {{-- <div class="menusamping mt-4">
         <a href="/logout" class="tombol-side">Logout</a>
-    </div>
+    </div> --}}
 </div>
 
 <script>
