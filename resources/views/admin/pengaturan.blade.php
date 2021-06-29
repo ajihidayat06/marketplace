@@ -186,6 +186,40 @@
             </div>
             </div>
         </div>
+
+        {{-- modal ubah foto --}}
+        <div class="modal fade" id="ubahfoto" tabindex="-1" role="dialog" aria-labelledby="editprofil" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">Ubah Foto</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    </div>
+                    <div class="modal-body">
+                    <form action="{{ route('ubah_foto') }}" method="POST" enctype="multipart/form-data">
+                                {{ csrf_field() }}
+                                <input type="hidden" name="user_id" value="{{Auth::User()->id }}">
+                                
+                                    <div class="col-md-6 offset-3">
+                                        <img class="img-thumbnail rounded" src="{{ Auth::User()->user_info->getAvatar() }} " style="height: 200px; width: 200px" alt="">
+                                    </div>
+                                    <div class="col-md-6 form-group mt-3">
+                                        <label for="" class="text-secondary">Ubah foto profil</label>
+                                        <input type="file" name="user_image">
+                                    </div>
+                                
+                                <br>
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <button type="submit" class="btn btn-primary">Ubah Foto</button>
+                            </form>
+                    </div>
+                    
+                    
+                </div>
+            </div>
+        </div>
 @endsection
 
 @section('footer')

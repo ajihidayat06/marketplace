@@ -14,7 +14,7 @@ class KelolaBarangController extends Controller
     public function index()
     {
         $kategori = Kategori::pluck('kategori_nama', 'id');
-        $barang = Barang::where('user_id', Auth::id())->get();
+        $barang = Barang::where('user_id', Auth::id())->where('status', 1)->paginate(8);
         return view('kelolabarang', [
             'kategoris' => $kategori,
             'barang' => $barang,
@@ -42,6 +42,7 @@ class KelolaBarangController extends Controller
         $tambah_barang->kategori_id = $request->kategori_barang;
         $tambah_barang->barang_deskripsi = $request->deskripsi_barang;
         $tambah_barang->user_id = Auth::id();
+        $tambah_barang->status = 1;
         $tambah_barang->save();
         return redirect()->route('kelola_barang');
     }
@@ -85,7 +86,8 @@ class KelolaBarangController extends Controller
         if ($cari->count() != 0) {
             return redirect()->route('kelola_barang')->with('tolak_hapus', 'Tidak bisa hapus saat ini karena ada transaksi pada barang ini');
         } else {
-            $barang->delete();
+            $barang->status = false;
+            $barang->save();
             return redirect()->route('kelola_barang')->with('hapus', 'Data deleted successfully');
         }
     }

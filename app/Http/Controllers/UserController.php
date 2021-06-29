@@ -15,6 +15,9 @@ use App\wilayah_kelurahan;
 use App\Sewa;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Hash;
+use App\Mail\VerifikasiAkun;
+use App\User;
+use Illuminate\Support\Facades\Mail;
 
 class UserController extends Controller
 {
@@ -120,6 +123,7 @@ class UserController extends Controller
     {
         $userinfo = User_info::where('user_id', Auth::id())->first();
         //validasi
+
         $this->validate($request, [
             'Telephone' => 'required|digits_between:11,13',
             'user_alamat' => 'required|string',
@@ -127,10 +131,26 @@ class UserController extends Controller
             'user_kabupaten' => 'required',
             'user_kecamatan' => 'required',
             'user_kelurahan' => 'required',
+            'user_nama_rek' => 'required',
+            'user_nama_ktp' => 'required',
             'user_rek' => 'required|digits:12|unique:App\User_info,user_rek',
             'user_bank' => 'required|string',
             'user_KTP' => 'required|digits:16|unique:App\User_info,user_KTP',
-            'user_foto_ktp' => 'required|mimes:jpeg,png',
+            'user_foto_ktp' => 'required|mimes:jpg,jpeg,png',
+        ], [
+            'user_alamat.required' => 'Alamat tidak boleh kosong',
+            'Telephone.required' => 'Silahkan isi nomor HP anda',
+            'user_provinsi.required' => 'Silahkan isi provinsi tempat tinggal anda',
+            'user_kabupaten.required' => 'Silahkan isi kabupaten tempat tinggal anda',
+            'user_kecamatan.required' => 'Silahkan isi kecamatan tempat tinggal anda',
+            'user_kelurahan.required' => 'Silahkan isi kelurahan tempat tinggal anda',
+            'user_nama_rek.required' => 'Silahkan isi nama sesuai rekening anda',
+            'user_nama_ktp.required' => 'Silahkan isi nama sesuai KTP anda',
+            'user_rek.required' => 'Silahkan isi nomor rekening anda',
+            'user_nama_rek.required' => 'Silahkan isi nama sesuai rekening anda',
+            'user_bank.required' => 'Isi nama bank rekening anda',
+            'user_KTP.required' => 'Silahkan isi NIK anda',
+            'user_foto_ktp.required' => 'Upload foto KTP anda',
         ]);
 
         $provinsi = wilayah_provinsi::where('id', $request->user_provinsi)->first();
@@ -158,6 +178,9 @@ class UserController extends Controller
             $userinfo->user_nama_lengkap = $request->user_nama_ktp;
             $userinfo->user_foto_ktp = $file;
             $userinfo->save();
+            $admin = User::where('role', 'admin')->firstOrFail();
+            $user_verifikasi = User::where('id', Auth::id())->firstOrFail();
+            Mail::to($admin->email)->send(new VerifikasiAkun($user_verifikasi));
             return redirect('/pengaturan');
         }
     }

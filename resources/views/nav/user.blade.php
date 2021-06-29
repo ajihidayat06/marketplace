@@ -25,12 +25,13 @@
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <i class="fas fa-user"></i>
+                        <i class="fas fa-user"></i> <span class="text-capitalize">@php $nama = explode(" ",Auth::user()->nama); echo $nama[0]; @endphp </span>
+                            
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <a class="dropdown-item" href="/pengaturan">Pengaturan</a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#">Bantuan</a>
+                        <a class="dropdown-item" href="/bantuan">Bantuan</a>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="/logout">Logout</a>
                     </div>
@@ -60,6 +61,9 @@
                         <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
                     </li>
                 @endif
+                <li class="nav-item">
+                    <a class="nav-link" href="/bantuan">{{ __('Bantuan') }}</a>
+                </li>
             </ul>
         @endguest
 </nav>
@@ -71,12 +75,22 @@
         </div>
     @endif
     @if (count($errors)>0)
-        <div class="alert alert-danger">
+        {{-- <div class="alert alert-danger">
             <ul>
                 @foreach ($errors->all() as $error)
                 <li>{{$error}}</li>
                 @endforeach
             </ul>
+        </div> --}}
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <ul>
+                @foreach ($errors->all() as $error)
+                <li>{{$error}}</li>
+                @endforeach
+            </ul>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
         </div>
         
     @endif

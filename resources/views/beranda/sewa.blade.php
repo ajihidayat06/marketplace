@@ -81,7 +81,7 @@
                         <div class="mt-2">
                             <label class="col-md-3" for=""><strong>Pembayaran :</strong></label>
                             <div class="container">
-                                <select style="border-color:#DD16EB;" name="sewa_pembayaran" class="col-md-4 form-control" type="text" id="">
+                                <select style="border-color:#1A97BA;" name="sewa_pembayaran" class="col-md-4 form-control" type="text" id="">
                                     <option value="transfer">Transfer</option>
                                 </select>
                             </div>
@@ -89,7 +89,7 @@
                         <div class="mt-2">
                             <label class="col-md-5" for=""><strong>Pengambilan Barang :</strong></label>
                             <div class="container">
-                                <select style="border-color:#DD16EB;" name="sewa_pengambilan" class="col-md-6 form-control" type="text" id="">
+                                <select style="border-color:#1A97BA;" name="sewa_pengambilan" class="col-md-6 form-control" type="text" id="">
                                     <option value="ambil langsung">Ambil Langsung (ke Pemilik)</option>
                                     <option value="COD">COD</option>
                                 </select>
@@ -98,7 +98,7 @@
                         <div class="mt-2">
                             <label class="col-md-5" for=""><strong>Jaminan Sewa :</strong></label>
                             <div class="container">
-                                <select style="border-color:#DD16EB;" name="sewa_jaminan" class="col-md-6 form-control" type="text" id="">
+                                <select style="border-color:#1A97BA;" name="sewa_jaminan" class="col-md-6 form-control" type="text" id="">
                                     <option value="KTP">Kartu Tanda Penduduk (KTP)</option>
                                     <option value="SIM">SIM</option>
                                 </select>
@@ -115,8 +115,10 @@
                     </div>
                     <div class="card-body">
                         <div class="font-weight-light">
-                            <label class="col-md-6" for="">Harga Sewa/Unit</label>
-                            <span class="col-md-2 offset-1">Rp {{$item->barang_harga}}</span>
+                            <label class="col-md-5" for="">Harga Sewa/Unit</label>
+                            <span class="col-md-3 offset-2">Rp 
+                                <input class="border-0" style="color: grey; width: 75px;" type="text" name="sewa_harga" readonly id="sewa_harga" value="{{$item->barang_harga}}">
+                            </span>
                         </div>
                         <div class="font-weight-light">
                             <label class="col-md-6" for="">Banyak Sewa (Unit)</label>
@@ -129,14 +131,14 @@
                         <div class="font-weight-light">
                             <label class="col-md-4" for="">Biaya Layanan</label>
                             <span class="col-md-4 offset-3" style="color: grey"> Rp
-                            <input class="border-0 biaya_layanan" style="color: grey; width: 75px" type="text" name="sewa_biaya_layanan" readonly id="biaya_layanan" value="2500">
+                            <input class="border-0 biaya_layanan" style="color: grey; width: 75px" type="text" name="sewa_biaya_layanan" readonly id="biaya_layanan" value="{{$biaya_layanan->biaya}}">
                         </div>
                         
                         <hr style="border-top: 1px solid black">
                         <div class="font-weight-bold">
                             <label class="col-md-4" for="">Total Harga</label>
-                            <span class="col-md-4 offset-3" style="color: #DD16EB"> Rp 
-                                <input class=" border-0" style="color: #DD16EB; width: 75px" type="text" name="sewa_total_harga" readonly id="total_harga" value="">
+                            <span class="col-md-4 offset-3" style="color: #1A97BA"> Rp 
+                                <input class=" border-0" style="color: #1A97BA; width: 75px" type="text" name="sewa_total_harga" readonly id="total_harga" value="">
                             </span>
                         </div>
                         <hr style="border-top: 1px solid black">

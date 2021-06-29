@@ -71,7 +71,7 @@
                             <span>{{ $info->user_KTP }}</span>
                         </div>
                         <div class="mb-4">
-                        <span><img src="{{ asset('storage/'.$info->user_foto_ktp) }}" alt="" style="width: 500px">{{$info->user_foto_ktp}}</span>
+                        <span><img src="{{ asset('storage/'.$info->user_foto_ktp) }}" alt="" style="width: 500px"></span>
                         </div>
                     </div>
                 </div>

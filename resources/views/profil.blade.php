@@ -9,7 +9,7 @@
 
 @section('konten')
 <div class="container">
-    <h3 class="mb-3">PENGATRURAN</h3>
+    <h3 class="mb-3">PENGATURAN</h3>
     <div class="row">
         <div class="col-md-2">
                 @include('layout.user.sidebar')
@@ -25,7 +25,7 @@
                     </div>
                     <div class="col-sm-8  my-auto">
                         <div>
-                            <H2 style="color:#11647A">{{ Auth::User()->nama }} </H2>
+                            <H2 style="color:#11647A" class="text-uppercase">{{ Auth::User()->nama }} </H2>
                         </div>
                         <div>
                             <span class="text-secondary">{{ Auth::User()->email }}</span>
@@ -42,7 +42,7 @@
                     <div class="col-md-5">
                         <div class="border-bottom mb-2">
                             <h5 style="color: #1A97BA">Nama</h5>
-                            <span>{{ Auth::User()->nama }}</span>
+                            <span class="text-uppercase">{{ Auth::User()->nama }}</span>
                         </div>
                         <div class="border-bottom mb-2">
                             <h5 style="color: #1A97BA">Username</h5>
@@ -59,7 +59,7 @@
                             <div class="border-bottom mb-2">
                                 <h5 style="color: #1A97BA">HP/Telp</h5>
                                 @if ($item->user_telp!=null)
-                                    <span>{{ $item->user_telp }}</span>
+                                    <span>+{{ $item->user_telp }}</span>
                                 @else
                                     <span>-</span>
                                 @endif
@@ -81,7 +81,7 @@
                             @endforeach                                
                         @else
                         <div class="border-bottom mb-2">
-                            <h5 style="color: #1A97BA">HP/Telp</h5>
+                            <h5 style="color: #1A97BA">HP/WA</h5>
                             <span>-</span>
                         </div>
                         <div class="border-bottom mb-2">
@@ -109,8 +109,9 @@
                             {{ csrf_field() }}
                             <div class="row">
                                 <div class="form-isi col-md-4">
-                                    <label for="telp" style="color: #11647A">Nomor HP</label>
+                                    <label for="telp" style="color: #11647A">Nomor HP/WA</label>
                                     <input style="" name="Telephone" class="form-control @error('Telephone') is-invalid @enderror" type="text" id="telp" placeholder="Masukan Nomor HP Aktif ">
+                                    <div class="text-secondary"><span class="text-danger">Catatan: </span>Masukan dengan format +62 (ex: 628212222xxxx)</div>
                                     @error('Telephone')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>

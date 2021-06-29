@@ -11,7 +11,8 @@ use PDF;
 class LaporanTransaksiAdminController extends Controller
 {
     //
-    public function index(){
+    public function index()
+    {
         //INISIASI 30 HARI RANGE SAAT INI JIKA HALAMAN PERTAMA KALI DI-LOAD
         //KITA GUNAKAN STARTOFMONTH UNTUK MENGAMBIL TANGGAL 1
         $start = Carbon::now()->startOfMonth()->format('Y-m-d H:i:s');
@@ -21,7 +22,7 @@ class LaporanTransaksiAdminController extends Controller
         //JIKA USER MELAKUKAN FILTER MANUAL, MAKA PARAMETER DATE AKAN TERISI
         if (request()->date != '') {
             //MAKA FORMATTING TANGGALNYA BERDASARKAN FILTER USER
-            $date = explode(' - ' ,request()->date);
+            $date = explode(' - ', request()->date);
             $start = Carbon::parse($date[0])->format('Y-m-d') . ' 00:00:01';
             $end = Carbon::parse($date[1])->format('Y-m-d') . ' 23:59:59';
         }
@@ -31,7 +32,9 @@ class LaporanTransaksiAdminController extends Controller
         $count = Sewa::where('status_id', 8)->count();
         return view('admin.laporan_transaksi.index', [
             'laporan' => $laporan,
-            'jumlah' => $count
+            'jumlah' => $count,
+            'start' => $start,
+            'end' => $end
         ]);
     }
 

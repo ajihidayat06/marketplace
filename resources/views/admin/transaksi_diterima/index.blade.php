@@ -21,6 +21,7 @@
                         <th scope="col">Harga Barang</th>
                         <th scope="col">Jumlah Barang</th>
                         <th scope="col">Pemilik</th>
+                        <th scope="col">Penerimaan Barang</th>
                         <th scope="col">Aksi</th>
                     </tr>
                     </thead>
@@ -28,10 +29,15 @@
                             @foreach ($transaksi as $item)
                             <tr class="text-center">
                                 <th scope="row">{{$loop->iteration}}</th>
-                                <td>{{ $item->barang->barang_nama }}</td>
+                                <td class="text-uppercase">{{ $item->barang->barang_nama }}</td>
                                 <td>{{ $item->barang->barang_harga}}</td>
                                 <td>{{ $item->sewa_detail_jumlah }}</td>
-                                <td>{{ $item->pemilik->nama }}</td>
+                                <td class="text-capitalize">{{ $item->pemilik->nama }}</td>
+                                @if ( $item->konfirmasi_penerimaan_barang == 0)
+                                    <td class="text-info font-weight-bold">Belum diterima Penyewa</td>
+                                @else
+                                <td class="text-success font-weight-bold">Diterima Penyewa</td>
+                                @endif
                                 <td>
                                     {{-- <form action="{{ route('detail_transaksi_diterima', ['id', $item->id])}}" method="POST">
                                         @csrf

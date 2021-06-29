@@ -1,7 +1,7 @@
 
 @extends('layout/main')
 
-@section('title','Pengaturan | informasi Bank')
+@section('title','Pengaturan | Informasi Bank')
 
 @section('nav')
     @include('nav.user')
@@ -9,7 +9,7 @@
 
 @section('konten')
 <div class="container">
-    <h3 class="mb-3">PENGATRURAN</h3>
+    <h3 class="mb-3">PENGATURAN</h3>
     <div class="row">
         <div class="col-md-2">
 
@@ -18,7 +18,7 @@
         </div>
         <div class="col-md-8 border-left">
             <h4 class="mb-3" style="color: #11647A">Informasi Bank</h4>
-
+            <button type="button" class="btn btn-info mb-3" data-toggle="modal" data-target="#editbank">Edit Informasi Bank</button>
             <div class="top-box">
                 <div class="row">
                     <div class="col-md-3">
@@ -26,11 +26,17 @@
                         <p style="color: #1A97BA">Nama Bank</p>
                     </div>
                     <div class="col-md-3">
-                        <p style="">{{ $info_bank->user_rek }}</p>
-                        <p style="">{{ $info_bank->user_bank }}</p>
+                        @if ($info_bank->rek== null && $info_bank->user_bank == null)
+                            <p>: -</p>
+                            <p>: -</p>
+                        @else
+                            <p style="">: {{ $info_bank->user_rek }}</p>
+                            <p class="text-uppercase">: {{ $info_bank->user_bank }}</p>
+                        @endif
+                        
                     </div>
                 </div>
-                <button type="button" class="btn btn-info mt-3" data-toggle="modal" data-target="#editbank">Edit Informasi Bank</button>
+                
             </div>
         </div>
     </div>
@@ -50,7 +56,7 @@
                             <div class="row">
                                 <div class="form-isi col-md-6">
                                     <label for="rekening" class="text-dark">No.Rekening</label>
-                                    <input  name="rekening" class="form-control @error('rekening') is-invalid @enderror" type="text" id="rekening" placeholder="Masukan Nomor Rekening ">
+                                    <input  name="rekening" class="form-control @error('rekening') is-invalid @enderror" type="text" id="rekening" placeholder="Masukan Nomor Rekening " value="{{ $info_bank->user_rek }}">
                                     @error('rekening')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -59,7 +65,7 @@
                                 </div>
                                 <div class="form-isi col-md-6">
                                     <label for="nama_bank" class="text-dark">Nama Bank</label>
-                                    <input name="nama_bank" class="form-control @error('nama_bank') is-invalid @enderror" type="text" id="nama_bank" placeholder="Masukan Nama Bank">
+                                    <input name="nama_bank" class="form-control text-uppercase @error('nama_bank') is-invalid @enderror" type="text" id="nama_bank" placeholder="Masukan Nama Bank" value="{{ $info_bank->user_bank }}">
                                     @error('nama_bank')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>

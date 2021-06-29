@@ -36,6 +36,9 @@
 <div class="menusamping border-bottom">
     <a href="/pengaturan/kelola_barang" class="tombol-side">Kelola Barang</a>
 </div>
+<div class="menusamping border-bottom">
+    <a href="/pengaturan/laporan" class="tombol-side">Laporan</a>
+</div>
 @endif
 <div class="menusamping mt-4">
     <a href="/logout" class="tombol-side">Logout</a>

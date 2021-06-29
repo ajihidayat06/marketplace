@@ -19,7 +19,7 @@
     <div class="mt-4" style="min-height: 450px">
         {{-- <h4>Sewa</h4> --}}
         <div class="mt-5 text-center">
-            <h3 class="text-uppercase" style="color:#DD16EB">anda melakukan penyewaan pada barang ini</h3>
+            <h3 class="text-uppercase" style="color:#1A97BA">anda melakukan penyewaan pada barang ini</h3>
         </div>
         <div class="row mt-3 border rounded">
             <div class="col-md-5 my-auto mt-3 mb-3">
@@ -34,11 +34,12 @@
                             <h2 class="text-primary text-capitalize">{{$sewa_diterima->barang->barang_nama}}</h2>
                         </div>
                         <div class="col-md-6 offset-1 text-right my-auto">
-                            <h5 style="color:#DD16EB">{{ $sewa_diterima->pemilik->nama}} <i class="fas fa-user"></i></h5>
+                            <h5 class="text-capitalize" style="color:#1A97BA">{{ $sewa_diterima->pemilik->nama}} <i class="fas fa-user"></i></h5>
                         </div>
                     </div>
-                    <h6 class="text-dark">Tanggal sewa : {{$sewa_diterima->sewa_tanggal_mulai}} sampai {{$sewa_diterima->sewa_tanggal_berakhir}}</h6>
+                    <h6 class="text-dark">Tanggal sewa : {{date('d-m-Y', strtotime($sewa_diterima->sewa_tanggal_mulai))}} sampai {{date('d-m-Y', strtotime($sewa_diterima->sewa_tanggal_berakhir))}}</h6>
                     <h6 class="text-dark">Jumlah sewa : {{$sewa_diterima->sewa_detail_jumlah}} pcs</h6>
+                    <h6 class="text-dark">Lama sewa : {{$sewa_diterima->sewa_lama_hari}} hari</h6>
                     <h6 class="mt-3 text-primary text-capitalize">Pemilik Barang :</h6>
                     <h5 class="text-danger text-uppercase"><strong>{{$sewa_diterima->pemilik->nama}}</strong></h5>
                     <h6 class="text-secondary"><i class="fas fa-map-marker-alt"></i> {{$sewa_diterima->pemilik->user_info->user_alamat}}, {{$sewa_diterima->pemilik->user_info->user_kelurahan}}, 
@@ -56,12 +57,12 @@
                     </p>
                     <br>
                     <div class="row mb-3 mx-auto">
-                        <button type="button" data-toggle="modal" data-target="#" class="col-md-5 offset-1 btn btn-circle btn-md-sewa btn-outline-info">Cetak Kode Booking</button>
+                        <a href="{{route('cetak_kode_booking', ['id'=>$sewa_diterima->id])}}" class="col-md-5 offset-1 btn btn-circle btn-md-sewa btn-outline-info">Cetak Kode Booking</a>
                         <div class="col-md-5">
                             <form action="{{route('konfirmasi_penerimaan_barang', ['id'=> $sewa_diterima->id])}}" method="POST">
                                 {{ csrf_field() }}
                                 @method('PUT')
-                                <button class=" btn btn-circle btn-md-sewa btn-primary">Saya telah Menerima Barang</button>
+                                <button class=" btn btn-circle btn-md-sewa btn-primary" id="konfirmasi">Saya telah Menerima Barang</button>
                             </form>
                         </div>
                     </div>
@@ -71,35 +72,15 @@
     </div>
 </div>
 
-{{-- modal konfir_penerimaan_barang --}}
-{{-- <div class="modal fade" id="konfirmasiPenerimaanBarang" tabindex="-1" role="dialog" aria-labelledby="konfirmasiPenerimaanbarang" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLongTitle">Konfirmasi Penerimaan Barang</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <form action="#" method="POST">
-                    {{ csrf_field() }}
-                    <input type="hidden" id="id_terima_sewa" name="id_konfirmasi_penerimaan" value="{{ $sewa_diterima->id }}">
-                    Silahkan tulis kode booking untuk dikirim ke calon penyewa
-                    <div class="col-md-10 mt-3">
-                        <label for="kode_booking">Kode Booking</label>
-                        <input class="form-control text-uppercase" type="text" name="kode_booking" id="kode_booking">
-                    </div>
-                    <div class="col-md-10 mt-3">
-                        <span class="text-danger" style="font-size: 10pt">*Note : </span>
-                        <span class="text-secondary" style="font-size: 10pt">Kode booking digunakan untuk dicocokan dengan calon penyewa, untuk memastikan bahwa anda bertemu dengan calon penyewa yang benar</span>
-                    </div>
-            </div>
-            <div class="modal-footer">
-                    <button type="submit" class="btn btn-primary">Kirim</button>
-                </form>
-            </div>
-        </div>
-    </div>
-</div> --}}
+
+
+{{-- <script>
+    var tglSewa = {{date('d-m-Y', strtotime($sewa_diterima->sewa_tanggal_mulai))}};
+    var tglSekarang = {{$tgl_skrg}};
+    var tombol = document.getElementById("konfirmasi");
+
+    if (tglSewa != tglSekarang){
+        tombol.disabled=true;
+    }
+</script> --}}
 @endsection

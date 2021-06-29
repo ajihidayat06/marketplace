@@ -53,28 +53,31 @@
                             <strong class="text-capitalize" style="font-size: 20pt">{{ $detail->barang_nama }}</strong>
                         </div>
                         <div class="mt-3">
-                            <label for="" style="color: #11647A"">Harga Sewa / Hari</label>
+                            <label for="" style="color: #11647A""><h5>Harga Sewa / Hari</h5></label>
                             <div>Rp {{ $detail->barang_harga }},-</div>
                         </div>
                         <div class="mt-3">
-                            <label for="" style="color: #11647A"">Jumlah Barang</label>
+                            <label for="" style="color: #11647A""><h5>Jumlah Barang</h5></label>
                             <div>{{ $detail->barang_jumlah }} pcs</div>
                         </div>
                         <div class="mt-3">
-                            <label for="" style="color: #11647A"">Kategori</label>
+                            <label for="" style="color: #11647A""><h5>Kategori</h5></label>
                             <div>{{ $detail->kategori->kategori_nama }}</div>
                         </div>
                         <div class="mt-3">
-                            <label for="" style="color: #11647A"">Status</label>
-                            <div>{{ $detail->barang_status }}</div>
+                            <label for="" style="color: #11647A""><h5>Status</h5></label>
+                            @if ($detail->status == 1)
+                                <div>Tersedia</div>
+                            @endif
+                            
                         </div>
                     </div>
                     @endforeach
                 </div>
                 <div>
                     <div class="mt-3">
-                        <label for="" style="color: #11647A"">Deskripsi</label>
-                        <div>{{ $detail->barang_deskripsi}}</div>
+                        <label for="" style="color: #11647A""><h5>Deskripsi</h5></label>
+                        <div class="text-uppercase">{{ $detail->barang_deskripsi}}</div>
                     </div>
                 </div>
             </div>
@@ -98,7 +101,7 @@
                             <div class="row">
                                 <input type="hidden" name="id_barang" id="id_barang" value="{{ $detail->id}}">
                                 <div class="form-isi col-md-12">
-                                    <label for="edit_nama_barang text-dark" >Nama Barang</label>
+                                    <label for="edit_nama_barang" class="text-secondary" >Nama Barang</label>
                                         <input  name="edit_nama_barang" class="form-control @error('edit_nama_barang') is-invalid @enderror" type="text" id="edit_nama_barang" value="{{ $detail->barang_nama }}">
                                     
                                     @error('edit_nama_barang')
@@ -110,7 +113,7 @@
                             </div>
                             <div class="row">
                                 <div class="form-isi col-md-5">
-                                    <label for="edit_jumlah_barang text-dark" >Jumlah Barang</label>
+                                    <label for="edit_jumlah_barang" class="text-secondary" >Jumlah Barang</label>
                                     <input  name="edit_jumlah_barang" class="form-control @error('edit_jumlah_barang') is-invalid @enderror" type="text" id="edit_jumlah_barang" value="{{ $detail->barang_jumlah }}">
                                     @error('edit_jumlah_barang')
                                         <span class="invalid-feedback" role="alert">
@@ -119,7 +122,7 @@
                                     @enderror
                                 </div>
                                 <div class="form-isi col-md-7">
-                                    <label for="edit_harga_barang text-dark" >Harga Sewa / Hari</label>
+                                    <label for="edit_harga_barang" class="text-secondary" >Harga Sewa / Hari</label>
                                     <input  name="edit_harga_barang" class="form-control @error('edit_harga_barang') is-invalid @enderror" type="text" id="edit_harga_barang" value="{{ $detail->barang_harga }}">
                                     @error('edit_harga_barang')
                                         <span class="invalid-feedback" role="alert">
@@ -128,21 +131,9 @@
                                     @enderror
                                 </div>
                             </div>
-                            {{-- <div class="row">
-                                <div class="form-isi col-md-12">
-                                    <label style="color:#DD16EB">Upload Gambar Barang</label><br>
-                                    <span style="margin-top: 50px;">
-                                    <input name="edit_gambar_barang" class="@error('edit_gambar_barang') is-invalid @enderror" type="file" id="edit_gambar_barang">
-                                    @error('edit_gambar_barang')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                </div>
-                            </div> --}}
                             <div class="row">
                                 <div class="form-isi col-md-12">
-                                    <label for="edit_kategori_barang text-dark" >Kategori Barang</label>
+                                    <label for="edit_kategori_barang" class="text-secondary" >Kategori Barang</label>
                                     <select  name="edit_kategori_barang" class="form-control @error('edit_kategori_barang') is-invalid @enderror" type="text" id="edit_kategori_barang">
                                     <option value="{{ $detail->kategori_id }}"> {{ $detail->kategori->kategori_nama }}</option>
                                         @foreach ($kategoris as $id => $kategori_nama)
@@ -156,7 +147,7 @@
                                     @enderror
                                 </div>
                                 <div class="form-isi col-md-12">
-                                    <label for="edit_deskripsi_barang text-dark" >Deskripsi Barang</label>
+                                    <label for="edit_deskripsi_barang" class="text-secondary" >Deskripsi Barang</label>
                                     <textarea  name="edit_deskripsi_barang" class="form-control @error('edit_deskripsi_barang') is-invalid @enderror" type="text" id="edit_deskripsi_barang">{{ $detail->barang_deskripsi }}
                                     </textarea>
                                     @error('edit_deskripsi_barang')

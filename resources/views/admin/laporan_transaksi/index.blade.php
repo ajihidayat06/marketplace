@@ -39,12 +39,12 @@
                     </tr>
                     </thead>
                     <tbody>
-                            @foreach ($laporan as $item)
+                            @foreach ($laporan as $no => $item)
                             <tr class="text-center">
                                 <th scope="row">{{$loop->iteration}}</th>
                                 <td>{{ date('d-m-Y', strtotime($item->created_at))  }}</td>
                                 <td class="text-left"> <strong>{{ $item->barang->barang_nama }}</strong> <br>
-                                    <label for=""><strong>Harga: </strong>{{ $item->barang->barang_harga}}</label><br>
+                                    <label for=""><strong>Harga: </strong>{{ $item->sewa_harga}}</label><br>
                                     <label for=""><strong>Jml.Sewa: </strong>{{ $item->sewa_detail_jumlah }}</label>
                                 </td>
                                 {{-- <td>{{ $item->barang->barang_harga}}</td>
@@ -59,21 +59,12 @@
                                 </td> --}}
                                 <td>{{ date('d-m-Y', strtotime($item->sewa_tanggal_mulai))  }}</td>
                                 <td>{{ date('d-m-Y', strtotime($item->sewa_tanggal_berakhir))  }}</td>
-                                <td id="pemasukan">2500</td>
+                                <td id="pemasukan">{{$item->sewa_biaya_layanan}}</td>
                                 {{-- <td>{{ $jumlah }}</td> --}}
                             </tr>
                             @endforeach
                     </tbody>
                 </table>
-                        {{-- <div class="row mt-5">
-                            <div class="col-md-3">
-                                <label for="">Total Pemasukan : </label>
-                            </div>
-                            <div class="col-md-5">
-                                <span id="hasil"></span> rupiah
-                            </div>
-    
-                        </div> --}}
         </div>
     </div>
 
@@ -83,11 +74,11 @@
     <script>
         //KETIKA PERTAMA KALI DI-LOAD MAKA TANGGAL NYA DI-SET TANGGAL SAA PERTAMA DAN TERAKHIR DARI BULAN SAAT INI
         $(document).ready(function() {
-            let start = moment().startOf('month')
-            let end = moment().endOf('month')
+            let start = moment().startOf('month');
+            let end = moment().endOf('month');
 
             //KEMUDIAN TOMBOL EXPORT PDF DI-SET URLNYA BERDASARKAN TGL TERSEBUT
-            $('#exportpdf').attr('href', '/laporan_transaksi_admin/cetak_pdf/' + start.format('YYYY-MM-DD') + '+' + end.format('YYYY-MM-DD'))
+            $('#exportpdf').attr('href', '/laporan_transaksi_admin/cetak_pdf/' + start.format('YYYY-MM-DD') + '+' + end.format('YYYY-MM-DD'));
 
             //INISIASI DATERANGEPICKER
             $('#created_at').daterangepicker({
@@ -96,20 +87,16 @@
             }, function(first, last) {
                 //JIKA USER MENGUBAH VALUE, MANIPULASI LINK DARI EXPORT PDF
                 $('#exportpdf').attr('href', '/laporan_transaksi_admin/cetak_pdf/' + first.format('YYYY-MM-DD') + '+' + last.format('YYYY-MM-DD'))
-            })
-        })
+            });
+        });
     </script>
-
-    {{-- <script>
-        var total = document.getElementById('pemasukan').innerHTML;
-        var jumlah = {{$jumlah}};
-        console.log(jumlah);
-        var hasil = document.getElementById('hasil');
-        hasil.innerHTML = Number(total)*jumlah;
-        
-    </script> --}}
 @endsection
 
 @section('footer')
+{{-- <div class="col-md-10 offset-2">
+    <div class="d-flex justify-content">
+        {{$laporan->links()}}
+    </div>
+</div> --}}
     @include('layout.admin.adminfooter')
 @endsection

@@ -44,19 +44,22 @@
                             <span>Nomor Rekening</span>
                         </div>
                         <div class="mb-4"">
+                            <span>Bank</span>
+                        </div>
+                        <div class="mb-4"">
                             <span>Atas Nama (Rekening)</span>
                         </div>
 
                     </div>
                     <div class="col-md-6 my-auto">
                         <div class="mb-4">
-                            <span>{{ $detail->user->nama }}</span>
+                            <span class="text-capitalize">{{ $detail->user->nama }}</span>
                         </div>
                         <div class="mb-4">
-                            <span>{{ $detail->barang->barang_nama }}</span>
+                            <span class="text-uppercase">{{ $detail->barang->barang_nama }}</span>
                         </div>
                         <div class="mb-4">
-                            <span>{{ $detail->barang->user->nama }}</span>
+                            <span class="text-capitalize">{{ $detail->barang->user->nama }}</span>
                         </div>
                         <div class="mb-4">
                             <span>{{ $detail->barang->barang_harga }} rupiah</span>
@@ -77,7 +80,10 @@
                             <span>{{ $detail->pemilik->user_info->user_rek }}</span>
                         </div>
                         <div class="mb-4">
-                            <span>{{ $detail->pemilik->user_info->user_nama_rek }}</span>
+                            <span class="text-uppercase">{{ $detail->pemilik->user_info->user_bank }}</span>
+                        </div>
+                        <div class="mb-4">
+                            <span class="text-capitalize">{{ $detail->pemilik->user_info->user_nama_rek }}</span>
                         </div>
                     </div>
                 </div>
@@ -161,8 +167,9 @@
 
     <script>
         var total = {{$detail->konfirmasi_pembayaran->konfirmasi_pembayaran_jumlah}};
+        var biaya_layanan = {{$biaya_layanan->biaya}};
         var transfer = document.getElementById('total'); 
-        transfer.innerHTML = total - 2500;
+        transfer.innerHTML = total - biaya_layanan;
  console.log(transfer);
     </script>
 

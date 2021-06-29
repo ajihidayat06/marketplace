@@ -57,27 +57,92 @@
         </div>
     </div> --}}
     <div class="row mt-4">
-        @foreach ($items as $item)
+        
         <div class="col-md-8">
             <img class="gambar_detail img-thumbnail rounded mx-auto d-block" src="{{ asset('storage/'.$item->barang_image) }}" alt="">
             <div class="mt-4">
-                <h6 class="text-capitalize" style="color: #0C65F0">
+                <h6 class="text-capitalize" style="color: #1FB7E0">
                     {{$item->kategori->kategori_nama}}
                 </h6>
-                <h3 class="text-capitalize mt-3" style="color: #DD16EB ">
+                <h3 class="text-uppercase mt-3" style="color: #11647A">
                     {{$item->barang_nama}}
                 </h3>
-                <h6 class="text-capitalize mt-3" style="color: #0C65F0">
+                <h6 class="text-capitalize mt-3" style="color: #1FB7E0">
                     <i class="fas fa-map-marker-alt"></i> {{ $item->user->user_info->user_kabupaten }}, {{ $item->user->user_info->user_provinsi }}
                 </h6>
             </div>
-            <hr>
-            <br>
-            <div class="">
-                <h6>
-                    <strong>Deskripsi</strong>
-                </h6>
-                <p>{{$item->barang_deskripsi}}</p>
+
+            <div class="mt-3">
+                <ul class="nav nav-tabs text-center" id="myTab" role="tablist">
+                    <li class="nav-item col-md-6">
+                        <a class="nav-link active" id="deskripsi-tab" data-toggle="tab" href="#deskripsi" role="tab" aria-controls="deskripsi" aria-selected="true">Deskripsi</a>
+                    </li>
+                    <li class="nav-item col-md-6">
+                        <a class="nav-link" id="jadwal-tab" data-toggle="tab" href="#jadwal" role="tab" aria-controls="jadwal" aria-selected="false">Jadwal Penyewaan</a>
+                    </li>
+                </ul>
+
+                <div class="tab-content mt-3" id="myTabContent">
+                    <div class="tab-pane fade show active text-dark" id="deskripsi" role="tabpanel" aria-labelledby="deskripsi-tab">
+                        <div class="" id="deskripsi" tabindex="-1" role="dialog" aria-labelledby="deskripsiTitle" aria-hidden="true">
+                            <h6>
+                                <strong>Deskripsi</strong>
+                            </h6>
+                            <p class="text-uppercase">{{$item->barang_deskripsi}}</p>
+                        </div>
+                    </div>
+
+                    <div class="tab-pane fade text-dark" id="jadwal" role="tabpanel" aria-labelledby="jadwal-tab">
+                        <div class="" id="jadwal" tabindex="-1" role="dialog" aria-labelledby="jadwalTitle" aria-hidden="true">
+                            <h6 class="mb-3">
+                                <strong>Jadwal Penyewaan Terkonfirmasi pada Barang Ini </strong>
+                            </h6>
+                            @if ($jadwal->count()>0)
+                            <table class="table table-hover">
+                                <thead>
+                                <tr class="text-center">
+                                    <th scope="col">No.</th>
+                                    <th scope="col">Tgl.Transaksi</th>
+                                    <th scope="col">Tgl.Mulai Sewa</th>
+                                    <th scope="col">Tgl.Selesai Sewa</th>
+                                    <th scope="col">Jumlah Sewa</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach ($jadwal as $no => $jadwals)
+                                        <tr>
+                                            <th scope="row" class="text-center">{{$jadwal->firstItem()+$no}}</th>
+                                            <td class="text-center">{{ date('d-F-Y', strtotime($jadwals->created_at))  }}</td>
+                                            <td class="text-center"> <strong>{{ date('d-F-Y', strtotime($jadwals->sewa_tanggal_mulai))}}</strong></td>
+                                            <td class="text-center"> <strong>{{ date('d-F-Y', strtotime($jadwals->sewa_tanggal_berakhir))}}</strong></td>
+                                            <td class="text-center">{{$jadwals->sewa_detail_jumlah}} </td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                            <div class="d-flex justify-content-end mt-5">
+                                {{$jadwal->links()}}
+                            </div>
+                            @else
+                            <div style="min-height: 200px">
+                                <div class="d-flex justify-content-center mt-5">
+                                    <div class="d-flex align-items-center" >
+                                        
+                                        <i class="fas fa-search-minus fa-5x" style="opacity: 0.5"></i>
+                                        
+                                    </div>
+                                    <br>
+                                </div>
+                                <div class="d-flex justify-content-center mt-3">
+                                    <label for="" class="text-secondary"><h6>"Tidak ada jadwal penyewaan"</h6></label>
+                                </div>
+                                </div>
+                            @endif
+                            
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </div>
         <div class="col-md-4">
@@ -85,18 +150,21 @@
                 {{ csrf_field() }}
                 <div class="card" style="width: 100%;">
                     <div class="card-body">
-                        <h3 class="card-title text-capitalize" style="color: #DD16EB ">Rp {{$item->barang_harga}},- / hari</h3>
+                        <h3 class="card-title text-capitalize" style="color: #11647A ">Rp {{$item->barang_harga}},-/ hari</h3>
                         <hr style="color:rgb(196, 187, 187)">
                         <h5>Pemilik / Vendor</h5>
-                        <h6 class="card-subtitle mb-2 mt-1" style="color: #DD16EB">
-                            <strong>{{$item->user->nama}}</strong>
+                        <h6 class="card-subtitle mb-2 mt-1" style="color: #1FB7E0">
+                            <strong class="text-capitalize">{{$item->user->nama}}</strong>
                         </h6>
                         <div class="mt-3">
                             @if ($item->user_id != Auth::id())
                                 
-                            <a href="#" class="tombol-konten hijau btn-circle btn-md-sewa col-md-6 ">
+
+                            <a href="https://wa.me/{{$item->user->user_info->user_telp}}?text=Apakah {{$item->barang_nama}} ini tersedia untuk disewa?" class="tombol-konten hijau btn-circle btn-md-sewa col-md-6 ">
                                 <i class="fab fa-whatsapp"></i> Chat Pemilik
                             </a>
+                            
+                            <p class="text-secondary">Silahkan hubungi pemilik untuk mengetahui ketersediaan barang</p>
                             @endif
                         </div>
                         @if ($item->user_id != Auth::id())
@@ -112,8 +180,8 @@
                                 <i class="fas fa-plus"></i>
                             </button>
                         </div>
-                        <p class="card-text mt-1 text-secondary">Barang Tersedia: {{$item->barang_jumlah}} </p>
-                        
+                        <div class="card-text mt-1 text-secondary">Jumlah Barang: {{$item->barang_jumlah}} </div>
+                        <div class="card-text mt-1 text-secondary">Stok Barang Hari ini: {{$stok}} </div>
                         <div class="mt-3">
                             <label for="mulai_sewa">
                                 <h6>Tanggal Mulai Sewa</h6>
@@ -130,7 +198,7 @@
                         @else
                         <hr style="color: rgb(196, 187, 187)">
                         <h5 class="mt-3">Stok</h5>
-                        <p class="card-text mt-1 text-secondary">Stok Barang Tersedia: {{$item->barang_jumlah}} </p>
+                        <p class="card-text mt-1 text-secondary">Jumlah Barang: {{$item->barang_jumlah}} </p>
                         @endif
 
                         {{-- <div class="mt-3">
@@ -145,7 +213,7 @@
 
                         <div class="col-md-12 mt-2">
                             @if ($item->user_id != Auth::id())
-                            <button type="submit" class="tombol-konten ungu-biru btn-circle btn-md-sewa">
+                            <button type="submit" class="btn btn-circle btn-primary btn-md-sewa">
                                 <i class="fas fa-shopping-cart"></i> Sewa
                             </button>
                             @endif
@@ -154,7 +222,7 @@
                 </div>
             </form>
         </div>
-        @endforeach
+        
     </div>
 </div>
 

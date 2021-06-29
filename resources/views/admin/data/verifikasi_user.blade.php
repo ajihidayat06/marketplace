@@ -11,6 +11,23 @@
     @include('layout.admin.adminsidebar')
     <div class="top-box-admin">
         <div class="col-md-10 offset-md-2">
+            @if (session('berhasil_tolak'))
+            <div class="container">
+                <div class="alert alert-success">
+                    {{ session('berhasil_tolak') }}. 
+                    
+                </div>
+            </div>
+            @endif
+            @if (session('berhasil_terima'))
+            <div class="container">
+                <div class="alert alert-success">
+                    {{ session('berhasil_terima') }}. 
+                    
+                </div>
+            </div>
+            @endif
+
             <h3 class="mb-5">Permintaan Verifikasi User</h3>
                 <table class="table table-hover">
                     <thead>

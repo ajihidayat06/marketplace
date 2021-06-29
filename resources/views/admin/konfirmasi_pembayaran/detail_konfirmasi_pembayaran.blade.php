@@ -32,7 +32,13 @@
                             <span>Jumlah Sewa</span>
                         </div>
                         <div class="mb-4"">
+                            <span>Tanggal Sewa</span>
+                        </div>
+                        <div class="mb-4"">
                             <span>Lama Sewa</span>
+                        </div>
+                        <div class="mb-4"">
+                            <span>Nama (pengirim)</span>
                         </div>
                         <div class="mb-4">
                             <span>Jumlah Transfer</span>
@@ -44,25 +50,31 @@
                     </div>
                     <div class="col-md-6 my-auto">
                         <div class="mb-4">
-                            <span>{{ $detail->user->nama }}</span>
+                            <span class="text-capitalize">{{ $detail->user->nama }}</span>
                         </div>
                         <div class="mb-4">
-                            <span>{{ $detail->barang->barang_nama }}</span>
+                            <span class="text-capitalize">{{ $detail->barang->barang_nama }}</span>
                         </div>
                         <div class="mb-4">
-                            <span>{{ $detail->barang->user->nama }}</span>
+                            <span class="text-capitalize">{{ $detail->barang->user->nama }}</span>
                         </div>
                         <div class="mb-4">
-                            <span>{{ $detail->barang->barang_harga }} rupiah</span>
+                            <span class="text-capitalize">{{ $detail->barang->barang_harga }} rupiah</span>
                         </div>
                         <div class="mb-4">
-                            <span>{{ $detail->sewa_detail_jumlah }} Pcs</span>
+                            <span class="text-capitalize">{{ $detail->sewa_detail_jumlah }} Pcs</span>
                         </div>
                         <div class="mb-4">
-                            <span>{{ $detail->sewa_lama_hari }} Hari</span>
+                            <span class="text-capitalize">{{ date('d-m-Y', strtotime($detail->sewa_tanggal_mulai)) }} Sampai {{ date('d-m-Y', strtotime($detail->sewa_tanggal_berakhir)) }}</span>
                         </div>
                         <div class="mb-4">
-                            <span>{{ $detail->konfirmasi_pembayaran->konfirmasi_pembayaran_jumlah }} rupiah</span>
+                            <span class="text-capitalize">{{ $detail->sewa_lama_hari }} Hari</span>
+                        </div>
+                        <div class="mb-4">
+                            <span class="text-capitalize">{{ $detail->konfirmasi_pembayaran->konfirmasi_pembayaran_nama }}</span>
+                        </div>
+                        <div class="mb-4">
+                            <span class="text-capitalize">{{ $detail->konfirmasi_pembayaran->konfirmasi_pembayaran_jumlah }} rupiah</span>
                         </div>
                         <div class="mb-4" >
                             <span><img src="{{ asset('storage/'.$detail->konfirmasi_pembayaran->konfirmasi_pembayaran_foto)}}" style="height: 350px; width:100%" alt=""></span>
@@ -97,13 +109,6 @@
                             <div class="mb-1">
                                 <input type="hidden" id="id_detail_konfirmasi" name="id_detail_konfirmasi" value="">
                                 <div class="form-isi col-md-10">
-                                    <label for="status_sewa" style="color: #DD16EB">Status Sewa</label>
-                                    <select style="border-color:#DD16EB;" name="status_sewa" class="form-control @error('status_sewa') is-invalid @enderror" type="text" id="status_sewa">
-                                        <option value="{{ $detail->status_id }}"> {{ $detail->status->status_value }}</option>
-                                        @foreach ($status as $value)
-                                            <option value="{{$value->id}}">{{ $value->status_value }}</option>
-                                        @endforeach
-                                    </select>
                                     @error('status_sewa')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -111,8 +116,8 @@
                                     @enderror
                                 </div>
                                 <div class="form-isi col-md-10">
-                                    <label for="edit_nama_kategori" style="color: #DD16EB">Pesan</label>
-                                    <textarea style="border-color:#DD16EB;" name="konfirmasi_pembayaran_value" class="form-control @error('edit_status_value') is-invalid @enderror" id="konfirmasi_pembayaran_value"  cols="10" rows="5" value=""></textarea>
+                                    <label for="edit_nama_kategori" style="color: #1A97BA">Pesan</label>
+                                    <textarea style="border-color:#1A97BA;" name="konfirmasi_pembayaran_value" class="form-control @error('edit_status_value') is-invalid @enderror" id="konfirmasi_pembayaran_value"  cols="10" rows="5" value=""></textarea>
                                     @error('konfirmasi_pembayaran_value')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>

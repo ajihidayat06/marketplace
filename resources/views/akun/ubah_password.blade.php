@@ -1,7 +1,7 @@
 
 @extends('layout/main')
 
-@section('title','Pengaturan | informasi Bank')
+@section('title','Pengaturan | Ubah Password')
 
 @section('nav')
     @include('nav.user')
@@ -15,7 +15,7 @@
     </div>
 @endif
 
-    <h3 class="mb-3">PENGATRURAN</h3>
+    <h3 class="mb-3">PENGATURAN</h3>
     <div class="row">
         <div class="col-md-2">
 

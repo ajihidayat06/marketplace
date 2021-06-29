@@ -15,7 +15,7 @@
 @endsection
 
 @section('konten')
-<div class="container">
+{{-- <div class="container">
     <div class="mt-4" style="min-height: 450px">
         <h4>Pembayaran</h4>
         <div class="mt-5 text-center">
@@ -25,6 +25,26 @@
             <h5 class="text-capitalize mt-3">atas nama: {{$info_admin->user_info->user_nama_rek}}</h5>
             <div class="mt-5">
                 <h4 class="text-capitalize" style="color: #DD16EB">
+                    Besar tagihan
+                </h4>
+                <h5 class="mt-3">
+                <strong>Rp {{$bayar->sewa_total}},-</strong>
+                </h5>
+            </div>
+        </div>
+    </div>
+</div> --}}
+
+<div class="container">
+    <div class="mt-4" style="min-height: 500px">
+        <h4>Pembayaran</h4>
+        <div class="mt-5 text-center">
+            <h3 class="text-uppercase" style="color:#11647A">silahkan lakukan pembayaran</h3>
+            <p class="text-capitalize" style="font-size: 18pt">melalui tranfer bank BNI ke nomor rekening berikut :</p>
+            <h4 class="mt-3 text-primary">{{$info_admin->user_info->user_rek}}</h4>
+            <h5 class="text-capitalize mt-3">atas nama: {{$info_admin->user_info->user_nama_rek}}</h5>
+            <div class="mt-5">
+                <h4 class="text-capitalize" style="color: #11647A">
                     Besar tagihan
                 </h4>
                 <h5 class="mt-3">

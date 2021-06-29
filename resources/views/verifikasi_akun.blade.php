@@ -8,6 +8,7 @@
 @endsection
 
 @section('konten')
+
 <div class="container">
     <h3>PENGATRURAN</h3>
     <div class="row">
@@ -21,18 +22,20 @@
             <form action="{{route('verifikasi_akun')}}" method="POST" enctype="multipart/form-data">
                 {{ csrf_field() }}
                 <div class="row">
-                    <div class="form-isi col-md-4">
-                        <label for="telp" class="text-info">Nomor HP</label>
-                        <input style="" name="Telephone" class="form-control @error('Telephone') is-invalid @enderror" type="text" id="telp" placeholder="Masukan Nomor HP Aktif ">
+                    <div class="form-isi col-md-5">
+                        <label for="telp" class="text-info">Nomor HP/WA</label>
+                        <input style="" name="Telephone" class="form-control @error('Telephone') is-invalid @enderror" type="text" id="telp" value="{{ old('Telephone') }}" placeholder="Masukan Nomor HP Aktif ">
+                        
+                        <div class="text-secondary"><span class="text-danger">Catatan: </span>Masukan dengan format +62 (ex: 628212222xxxx)</div>
                         @error('Telephone')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
                             </span>
                         @enderror
                     </div>
-                    <div class="form-isi col-md-8">
+                    <div class="form-isi col-md-7">
                         <label for="user_alamat" class="text-info">Alamat</label>
-                        <input style="" name="user_alamat" class="form-control @error('user_alamat') is-invalid @enderror" type="text" id="user_alamat" placeholder="Masukan Alamat anda ">
+                        <input style="" name="user_alamat" class="form-control @error('user_alamat') is-invalid @enderror" type="text" id="user_alamat" value="{{ old('user_alamat') }}" placeholder="Masukan Alamat anda ">
                         @error('user_alamat')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -100,7 +103,7 @@
 
                 <div class="form-isi row">
                     <label for="user_nama_rek" class="text-info">Nama pada Buku Rekening</label>
-                    <input  name="user_nama_rek" class="form-control @error('user_nama_rek') is-invalid @enderror" type="text" id="user_nama_rek" placeholder="Masukan Nama Pemilik Rekening ">
+                    <input  name="user_nama_rek" class="form-control text-uppercase @error('user_nama_rek') is-invalid @enderror" type="text" id="user_nama_rek" value="{{ old('user_nama_rek') }}" placeholder="Masukan nama sesuai rekening ">
                     @error('user_nama_rek')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
@@ -109,7 +112,7 @@
                 </div>
                 <div class="form-isi row">
                     <label for="user_rek" class="text-info">Nomor Rekening</label>
-                    <input  name="user_rek" class="form-control @error('user_rek') is-invalid @enderror" type="text" id="user_rek" placeholder="Masukan Nomor Rekening Anda ">
+                    <input  name="user_rek" class="form-control @error('user_rek') is-invalid @enderror" type="text" id="user_rek" value="{{ old('user_rek') }}" placeholder="Masukan nomor rekening anda ">
                     @error('user_rek')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
@@ -118,7 +121,7 @@
                 </div>
                 <div class="form-isi row">
                     <label for="user_bank" class="text-info" >Nama Bank</label>
-                    <input  name="user_bank" class="form-control @error('user_bank') is-invalid @enderror" type="text" id="user_bank" placeholder="Masukan Nama Bank Rekening Anda ">
+                    <input  name="user_bank" class="form-control text-uppercase @error('user_bank') is-invalid @enderror" type="text" id="user_bank" value="{{ old('user_bank') }}" placeholder="Masukan nama bank rekening anda ">
                     @error('user_bank')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
@@ -127,7 +130,7 @@
                 </div>
                 <div class="form-isi row">
                     <label for="user_nama_ktp" class="text-info">Nama Sesuai KTP</label>
-                    <input  name="user_nama_ktp" class="form-control @error('user_nama_ktp') is-invalid @enderror" type="text" id="user_nama_ktp" placeholder="Masukan Nama Lengkap Sesuai KTP ">
+                    <input  name="user_nama_ktp" class="form-control text-uppercase @error('user_nama_ktp') is-invalid @enderror" type="text" id="user_nama_ktp" value="{{ old('user_nama_ktp') }}" placeholder="Masukan nama lengkap sesuai KTP ">
                     @error('user_nama_ktp')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
@@ -136,7 +139,7 @@
                 </div>
                 <div class="form-isi row">
                     <label for="user_KTP" class="text-info">NIK </label>
-                    <input  name="user_KTP" class="form-control @error('user_KTP') is-invalid @enderror" type="text" id="user_KTP" placeholder="Masukan NIK Anda ">
+                    <input  name="user_KTP" class="form-control @error('user_KTP') is-invalid @enderror" type="text" id="user_KTP" value="{{ old('user_KTP') }}" placeholder="Masukan NIK anda ">
                     @error('user_KTP')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
@@ -147,6 +150,7 @@
                     <label style="color:#11647A">Foto KTP Anda</label><br>
                     <span style="margin-top: 50px;">
                     <input name="user_foto_ktp" class="@error('user_foto_ktp') is-invalid @enderror" type="file" id="user_foto_ktp">
+                    <div class="text-secondary"><span class="text-danger">Catatan: </span>file foto menggunakan format jpg atau png</div>
                     @error('user_foto_ktp')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
@@ -154,7 +158,7 @@
                     @enderror
                     </span>
                 </div>
-                <button type="submit" class="tombol-konten biru">Simpan Data</button>
+                <button type="submit" class="btn btn-primary rounded">Simpan Data</button>
             </form>
                 
             </div>

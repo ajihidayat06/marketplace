@@ -1,7 +1,7 @@
 
 @extends('layout.admin.adminMain')
 
-@section('title','Transaksi Diterima')
+@section('title','Transaksi Ditolak')
 
 @section('nav')
     @include('nav.admin')
@@ -29,11 +29,11 @@
                             @foreach ($transaksi as $item)
                             <tr class="text-center">
                                 <th scope="row">{{$loop->iteration}}</th>
-                                <td>{{ $item->barang->barang_nama }}</td>
+                                <td class="text-uppercase">{{ $item->barang->barang_nama }}</td>
                                 <td>{{ $item->barang->barang_harga}}</td>
                                 <td>{{ $item->sewa_detail_jumlah }}</td>
-                                <td>{{ $item->user->nama }}</td>
-                                <td>{{ $item->pemilik->nama }}</td>
+                                <td class="text-capitalize">{{ $item->user->nama }}</td>
+                                <td class="text-capitalize">{{ $item->pemilik->nama }}</td>
                                 <td>
                                     {{-- <form action="{{ route('detail_transaksi_diterima', ['id', $item->id])}}" method="POST">
                                         @csrf

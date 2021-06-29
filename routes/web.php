@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
-
+use App\Sewa;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -24,6 +24,7 @@ use Illuminate\Support\Facades\Auth;
 // Route::get('/login', 'AuthController@login')->middleware('guest');
 // Route::post('/login', 'AuthController@postlogin')->name('login');
 Route::get('/logout', 'AuthController@logout');
+Route::get('/bantuan', 'AuthController@bantuan');
 // Route::get('/register', 'AuthController@daftar')->middleware('guest');
 // Route::post('/daftar', 'AuthController@postdaftar')->name('daftar');
 
@@ -73,13 +74,17 @@ Route::prefix('pengaturan')->middleware('auth')->group(function () {
     Route::post('/informasi_bank', 'UserController@editbank')->name('editbank');
     Route::get('vendor', 'VendorController@index')->name('vendor');
     Route::get('/kelola_barang', 'KelolaBarangController@index')->name('kelola_barang');
+    Route::get('/laporan', 'LaporanController@index')->name('laporan');
+
     Route::get('/detail_sewa_diterima/{id}', 'SewaDiterimaController@index');
+
     // Route::get('/detail_sewa_diterima/{id}/konfirmasi_penerimaan_barang', 'SewaDiterimaController@konfirmasi_penerimaan_barang');
     // Route::get('/kelola_barang/detail_barang/{id}','KelolaBarangController@detail');
 });
 
 Route::middleware(['auth', 'cekrole:admin'])->group(function () {
     Route::get('/dashboard', 'AdminController@index')->name('dashboard');
+    Route::post('/ubah_biaya_layanan', "AdminController@ubah_biaya")->name('ubah_biaya_layanan');
     Route::get('/pengaturan_admin', 'PengaturanAdminController@index')->name('pengaturan_admin');
     Route::post('/pengaturan_admin', 'PengaturanAdminController@editadmin')->name('editprofiladmin');
     Route::get('/data_user', 'AdminController@user')->name('user');
@@ -91,6 +96,13 @@ Route::middleware(['auth', 'cekrole:admin'])->group(function () {
     Route::get('/transaksi_diterima', 'TransaksiDiterimaController@index')->name('transaksi_diterima');
     Route::get('/transaksi_ditolak', 'TransaksiDiterimaController@index_ditolak')->name('transaksi_ditolak');
     Route::get('/laporan_transaksi_admin', 'LaporanTransaksiAdminController@index')->name('laporan_transaksi_admin');
+});
+
+Route::prefix('data_user')->middleware(['auth', 'cekrole:admin'])->group(function () {
+    Route::get('/detail_user/{id}', 'AdminController@detail_user')->name('detail_user');
+    Route::post('/hapus', 'AdminController@hapus')->name('hapus_user');
+    Route::get('/user_terhapus', 'AdminController@user_terhapus')->name('user_terhapus');
+    Route::get('/kembalikan/{id}', 'AdminController@kembalikan')->name('kembalikan');
 });
 
 Route::prefix('verifikasi_user')->middleware(['auth', 'cekrole:admin'])->group(function () {
@@ -113,7 +125,8 @@ Route::prefix('status')->middleware(['auth', 'cekrole:admin'])->group(function (
     Route::post('/hapus_status', 'StatusController@hapus_status')->name('hapus_status');
 });
 
-Route::prefix('status')->middleware(['auth', 'cekrole:admin'])->group(function () {
+Route::prefix('data_barang')->middleware(['auth', 'cekrole:admin'])->group(function () {
+    Route::get('detail_barang/{id}', 'DataBarangController@detail')->name('info_barang');
     Route::post('/hapus_data_barang', 'DataBarangController@hapus_data_barang')->name('hapus_data_barang');
 });
 
@@ -123,7 +136,7 @@ Route::prefix('konfirmasi_pembayaran')->middleware(['auth', 'cekrole:admin'])->g
     Route::get('/detail/{id}/terima_konfirmasi', 'KonfirmasiPembayaranController@terima_konfirmasi')->name('terima_konfirmasi_pembayaran');
 });
 
-Route::prefix('pengaturan/kelola_barang')->middleware(['auth'])->group(function () {
+Route::prefix('pengaturan/kelola_barang')->middleware(['auth', 'VerifikasiAkun:'])->group(function () {
     Route::post('/tambah_barang', 'KelolaBarangController@tambah_barang')->name('tambah_barang');
     Route::get('/detail_barang/{id}', 'KelolaBarangController@detail');
     Route::post('/detail_barang/edit_barang', 'KelolaBarangController@edit')->name('edit_barang');
@@ -144,6 +157,7 @@ Route::prefix('pengaturan/vendor')->middleware('auth')->group(function () {
 });
 Route::prefix('pengaturan/detail_sewa_diterima/{id}')->middleware('auth')->group(function () {
     Route::put('/konfirmasi_penerimaan_barang', 'SewaDiterimaController@konfirmasi_penerimaan_barang')->name('konfirmasi_penerimaan_barang');
+    Route::get('/cetak_kode_booking', 'SewaDiterimaController@cetak')->name('cetak_kode_booking');
 });
 
 Route::prefix('transaksi_diterima')->middleware(['auth', 'cekrole:admin'])->group(function () {
@@ -154,10 +168,71 @@ Route::prefix('transaksi_ditolak')->middleware(['auth', 'cekrole:admin'])->group
 });
 
 Route::prefix('laporan_transaksi_admin')->middleware(['auth', 'cekrole:admin'])->group(function () {
-    Route::get('/cetak_pdf/{daterange}', 'LaporanTransaksiAdminController@cetak')->name('catak_laporan');
+    Route::get('/cetak_pdf/{daterange}', 'LaporanTransaksiAdminController@cetak')->name('cetak_laporan');
 });
 
+Route::prefix('pengaturan/laporan')->middleware(['auth'])->group(function () {
+    Route::get('/cetak_pdf/{daterange}', 'LaporanController@cetak')->name('cetak_laporan_vendor');
+});
 Auth::routes();
 Auth::routes(['verify' => true]);
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::get('/daftar-mahasiswa', function () {
+    $sewa = Sewa::where('status_id', 1)->get();
+    foreach ($sewa as $item) {
+        $batas = $item->created_at;
+        $batas_akhir = strtotime($batas . "+2 hours");
+        date_default_timezone_set('Asia/Jakarta');
+        $sekarang = strtotime("now");
+
+
+        if (($sekarang > $batas_akhir) && ($item->status_id == 1)) {
+            $item->status_id = 9;
+            $item->save();
+        }
+        echo date('Y-m-d-H-i', strtotime($batas)) . "<br>";
+        echo date('Y-m-d-H-i', strtotime($batas_akhir)) . "<br>";
+        echo date('Y-m-d-H-i', strtotime($sekarang)) . "<br>";
+        echo $item->status_id;
+    }
+});
+
+Route::get('/mulai', function () {
+    $mulai_sewa = Sewa::where('status_id', 6)->get();
+
+    foreach ($mulai_sewa as $item) {
+        $tgl_mulai = $item->sewa_tanggal_mulai;
+        $awal = strtotime($tgl_mulai . "+10 hours");
+        date_default_timezone_set('Asia/Jakarta');
+        $sekarang = strtotime("now");
+
+        if (($sekarang > $awal) && ($item->status_id == 6)) {
+            $item->status_id = 7;
+            $item->save();
+        }
+        echo date('Y-m-d-H', strtotime($awal)) . "<br>";
+        echo date('Y-m-d-H', strtotime($sekarang)) . "<br>";
+        echo $item->status_id . "<br>";
+    }
+});
+
+// Route::get('/selesai', function () {
+//     $selesai_sewa = Sewa::where('status_id', 7)->get();
+
+//     foreach ($selesai_sewa as $item) {
+//         $tgl_selesai = $item->sewa_tanggal_berakhir;
+//         $akhir = strtotime($tgl_selesai . "+34 hours");
+//         date_default_timezone_set('Asia/Jakarta');
+//         $sekarang = strtotime("now");
+
+//         if (($sekarang > $akhir) && ($item->status_id == 7)) {
+//             $item->status_id = 8;
+//             $item->save();
+//         }
+//         echo date('F j, Y, g:i a', strtotime($akhir)) . "<br>";
+//         echo date('F j, Y, g:i a', strtotime($sekarang)) . "<br>";
+//         echo $item->status_id . "<br>";
+//     }
+// });

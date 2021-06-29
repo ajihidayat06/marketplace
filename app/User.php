@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
@@ -16,7 +17,7 @@ class User extends Authenticatable implements MustverifyEmail
      * @var array
      */
     protected $fillable = [
-        'nama', 'username', 'email', 'password','role',
+        'nama', 'username', 'email', 'password', 'role',
     ];
 
     /**
@@ -37,15 +38,21 @@ class User extends Authenticatable implements MustverifyEmail
         'email_verified_at' => 'datetime',
     ];
 
-    public function user_info(){
+    use SoftDeletes;
+    protected $dates = ['deleted_at'];
+
+    public function user_info()
+    {
         return $this->hasOne(User_info::class);
     }
 
-    public function barang(){
+    public function barang()
+    {
         return $this->hasMany(Barang::class);
     }
 
-    public function sewa(){
+    public function sewa()
+    {
         return $this->hasOne(Sewa::class);
     }
 }

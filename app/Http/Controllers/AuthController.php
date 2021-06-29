@@ -35,11 +35,11 @@ class AuthController extends Controller
         ];
 
         if (Auth::attempt($login)) {
-            if (Auth::user()->role == 'admin'){
+            if (Auth::user()->role == 'admin') {
 
                 return redirect('/dashboard');
-            }else{
-                return redirect('/'); 
+            } else {
+                return redirect('/');
             }
         }
         return redirect('/login')->with(['error' => 'Email/Password salah!']);
@@ -82,10 +82,15 @@ class AuthController extends Controller
         $user->password = bcrypt($request->password);
         $user->role = 'user';
         $user->save();
-            // return $user->id;
+        // return $user->id;
         $user_info = new User_info;
         $user_info->user_id = $user->id;
         $user_info->save();
         return redirect('/login');
+    }
+
+    public function bantuan()
+    {
+        return view('bantuan');
     }
 }

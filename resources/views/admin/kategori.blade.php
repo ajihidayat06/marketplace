@@ -11,14 +11,32 @@
     @include('layout.admin.adminsidebar')
     <div class="top-box-admin">
         <div class="col-md-10 offset-md-2">
+            @if (session('tambah'))
+            <div class="container">
+                <div class="alert alert-success">
+                    {{ session('tambah') }}. 
+                    {{-- <a href="{{ route('verifikasi_akunget')}}">Klik disini</a> untuk verifikasi akun --}}
+                </div>
+            </div>
+            @endif
+            @if (session('edit'))
+            <div class="container">
+                <div class="alert alert-success">
+                    {{ session('edit') }}. 
+                    {{-- <a href="{{ route('verifikasi_akunget')}}">Klik disini</a> untuk verifikasi akun --}}
+                </div>
+            </div>
+            @endif
             <h3 class="mb-5">Daftar Kategori</h3>
-            <button type="button" class="btn btn-success mb-3" data-toggle="modal" data-target="#tambahkategori">Tambah Kategori</button>
+            <button type="button" class="btn btn-success mb-3" data-toggle="modal" data-target="#tambahkategori">
+                <i class="fas fa-plus"></i> Tambah Kategori
+            </button>
                 <table class="table table-hover">
                     <thead>
                     <tr>
                         <th scope="col-md-1">No.</th>
                         <th scope="col-md-4">Nama Kategori</th>
-                        <th scope="col-md-2">Status</th>
+                        {{-- <th scope="col-md-2">Status</th> --}}
                         <th scope="col-md-2">Gambar / Icon</th>
                         <th scope="col-md-3">Aksi</th>
                     </tr>
@@ -28,11 +46,11 @@
                             <tr>
                                 <th scope="row">{{$loop->iteration}}</th>
                                 <td>{{ $kategori->kategori_nama }}</td>
-                                @if ($kategori->status==0)
+                                {{-- @if ($kategori->status==0)
                                     <td>Tidak Aktif</td>
                                 @else
                                     <td>Aktif</td>
-                                @endif
+                                @endif --}}
                                 <td>
                                     <img class="" src="{{ asset('storage/'.$kategori->kateori_image) }}" alt="Card image cap" style="height: 180px; width: 180px">
                                 </td>
@@ -40,12 +58,12 @@
                                     {{-- <button class="btn btn-warning btn-sm tombol-ubah" data-toggle="modal" data-target="#editicon" data-id="{{ $kategori->id }}" data-icon="{{ $kategori->kategori_image }}">
                                         <i class="far fa-file-image"></i> Ubah Icon</i>
                                     </button> --}}
-                                    <button class="btn btn-info btn-sm tombol-edit" data-toggle="modal" data-target="#editkategori" data-id="{{ $kategori->id }}" data-status="{{$kategori->status}}" data-kategori="{{ $kategori->kategori_nama }}">
-                                        <i class="fas fa-info-circle"> Edit</i>
+                                    <button class="btn btn-info tombol-edit" data-toggle="modal" data-target="#editkategori" data-id="{{ $kategori->id }}" data-status="{{$kategori->status}}" data-kategori="{{ $kategori->kategori_nama }}">
+                                        <i class="fas fa-info-circle"></i> Edit
                                     </button>
-                                <button href="#" class="btn btn-danger btn-sm tombol-hapus" data-toggle="modal" data-target="#hapuskategori" data-id="{{ $kategori->id }}">
+                                    {{-- <button href="#" class="btn btn-danger btn-sm tombol-hapus" data-toggle="modal" data-target="#hapuskategori" data-id="{{ $kategori->id }}">
                                         <i class="far fa-trash-alt"> Hapus</i>
-                                    </button>
+                                    </button> --}}
                                 </td>
                             </tr>
                             @endforeach
@@ -69,18 +87,18 @@
                             {{ csrf_field() }}
                             <div class="mb-1">
                                 <div class="form-isi col-md-10">
-                                    <label for="nama_kategori" style="color: #DD16EB">Nama Kategori</label>
-                                    <input style="border-color:#DD16EB;" name="nama_kategori" class="form-control @error('nama_kategori') is-invalid @enderror" type="text" id="nama_kategori" placeholder="Masukan Nama Kategori">
+                                    <label for="nama_kategori" style="color: #1A97BA">Nama Kategori</label>
+                                    <input style="border-color:#1A97BA;" name="nama_kategori" class="form-control @error('nama_kategori') is-invalid @enderror" type="text" id="nama_kategori" placeholder="Masukan Nama Kategori">
                                     @error('nama_kategori')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>
                                     @enderror
                                 </div>
-                                <div class="form-isi col-md-10">
-                                    <label for="status_kategori" style="color: #DD16EB">Status Kategori</label>
-                                    {{-- <input style="border-color:#DD16EB;" name="status_kategori" class="form-control @error('status_kategori') is-invalid @enderror" type="text" id="status_kategori" placeholder="Status Kategori"> --}}
-                                    <select style="border-color:#DD16EB;" class="form-control @error('status_kategori') is-invalid @enderror" name="status_kategori" id="status_kategori">
+                                {{-- <div class="form-isi col-md-10">
+                                    <label for="status_kategori" style="color: #1A97BA">Status Kategori</label>
+                                    
+                                    <select style="border-color:#1A97BA;" class="form-control @error('status_kategori') is-invalid @enderror" name="status_kategori" id="status_kategori">
                                         <option value="">-- Pilih Status --</option>
                                         <option value="1">Aktif</option>
                                         <option value="0">Tidak Aktif</option>
@@ -90,9 +108,9 @@
                                             <strong>{{ $message }}</strong>
                                         </span>
                                     @enderror
-                                </div>
+                                </div> --}}
                                 <div class="form-isi col-md-10">
-                                    <label for="gambar_kategori" style="color: #DD16EB">gambar / Icon Kategori</label>
+                                    <label for="gambar_kategori" style="color: #1A97BA">gambar / Icon Kategori</label>
                                     <input name="gambar_kategori" class="@error('gambar_kategori') is-invalid @enderror" type="file" id="gambar_kategori">
                                         @error('gambar_kategori')
                                             <span class="invalid-feedback" role="alert">
@@ -127,18 +145,18 @@
                             <div class="mb-1">
                                 <input type="hidden" id="id_kategori" name="id_kategori" value="">
                                 <div class="form-isi col-md-10">
-                                    <label for="edit_nama_kategori" style="color: #DD16EB">Nama Kategori</label>
-                                    <input style="border-color:#DD16EB;" name="edit_nama_kategori" class="form-control @error('edit_nama_kategori') is-invalid @enderror" type="text" id="edit_nama_kategori">
+                                    <label for="edit_nama_kategori" style="color: #1A97BA">Nama Kategori</label>
+                                    <input style="border-color:#1A97BA;" name="edit_nama_kategori" class="form-control @error('edit_nama_kategori') is-invalid @enderror" type="text" id="edit_nama_kategori">
                                     @error('edit_nama_kategori')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>
                                     @enderror
                                 </div>
-                                <div class="form-isi col-md-10">
-                                    <label for="edit_status_kategori" style="color: #DD16EB">Status Kategori</label>
-                                    {{-- <input style="border-color:#DD16EB;" name="status_kategori" class="form-control @error('status_kategori') is-invalid @enderror" type="text" id="status_kategori" placeholder="Status Kategori"> --}}
-                                    <select style="border-color:#DD16EB;" class="form-control @error('edit_status_kategori') is-invalid @enderror" name="edit_status_kategori" id="edit_status_kategori">
+                                {{-- <div class="form-isi col-md-10">
+                                    <label for="edit_status_kategori" style="color: #1A97BA">Status Kategori</label>
+                                   
+                                    <select style="border-color:#1A97BA;" class="form-control @error('edit_status_kategori') is-invalid @enderror" name="edit_status_kategori" id="edit_status_kategori">
                                         <option value="1">Aktif</option>
                                         <option value="0">Tidak Aktif</option>
                                     </select>
@@ -147,9 +165,9 @@
                                             <strong>{{ $message }}</strong>
                                         </span>
                                     @enderror
-                                </div>
+                                </div> --}}
                                 <div class="form-isi col-md-10">
-                                    <label for="edit_gambar_kategori" style="color: #DD16EB">Gambar / Icon Kategori</label>
+                                    <label for="edit_gambar_kategori" style="color: #1A97BA">Gambar / Icon Kategori</label>
                                     <input name="edit_gambar_kategori" class="@error('edit_gambar_kategori') is-invalid @enderror" type="file" id="edit_gambar_kategori">
                                         @error('edit_gambar_kategori')
                                             <span class="invalid-feedback" role="alert">

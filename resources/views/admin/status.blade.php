@@ -12,7 +12,9 @@
     <div class="top-box-admin">
         <div class="col-md-10 offset-md-2">
             <h3 class="mb-5">Daftar Status</h3>
-            <button type="button" class="btn btn-success mb-3" data-toggle="modal" data-target="#tambahstatus">Tambah Status</button>
+            {{-- <button type="button" class="btn btn-success mb-3" data-toggle="modal" data-target="#tambahstatus">
+                <i class="fas fa-plus"></i> Tambah Status
+            </button> --}}
                 <table class="table table-hover">
                     <thead>
                     <tr>
@@ -30,9 +32,9 @@
                                     <button class="btn btn-info tombol-edit" data-toggle="modal" data-target="#editstatus" data-id="{{ $statuss->id }}" data-status="{{$statuss->status_value}}">
                                         <i class="fas fa-info-circle"> Edit</i>
                                     </button>
-                                <button href="#" class="btn btn-danger tombol-hapus" data-toggle="modal" data-target="#hapusstatus" data-id="{{ $statuss->id }}">
+                                {{-- <button href="#" class="btn btn-danger tombol-hapus" data-toggle="modal" data-target="#hapusstatus" data-id="{{ $statuss->id }}">
                                         <i class="far fa-trash-alt"> Hapus</i>
-                                    </button>
+                                    </button> --}}
                                 </td>
                             </tr>
                             @endforeach
@@ -56,8 +58,8 @@
                             {{ csrf_field() }}
                             <div class="mb-1">
                                 <div class="form-isi col-md-10">
-                                    <label for="status_value" style="color: #DD16EB">Status Value</label>
-                                    <textarea style="border-color:#DD16EB;" name="status_value" class="form-control @error('status_value') is-invalid @enderror" id="status_value"  cols="10" rows="5" placeholder="Masukan isi status"></textarea>
+                                    <label for="status_value" style="color: #1A97BA">Status Value</label>
+                                    <textarea style="border-color:#1A97BA;" name="status_value" class="form-control @error('status_value') is-invalid @enderror" id="status_value"  cols="10" rows="5" placeholder="Masukan isi status"></textarea>
                                     @error('status_value')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -105,8 +107,8 @@
                             <div class="mb-1">
                                 <input type="hidden" id="id_status" name="id_status" value="">
                                 <div class="form-isi col-md-10">
-                                    <label for="edit_nama_kategori" style="color: #DD16EB">Status Value</label>
-                                    <textarea style="border-color:#DD16EB;" name="edit_status_value" class="form-control @error('edit_status_value') is-invalid @enderror" id="edit_status_value"  cols="10" rows="5" value=""></textarea>
+                                    <label for="edit_nama_kategori" style="color: #1A97BA">Status Value</label>
+                                    <textarea style="border-color:#1A97BA;" name="edit_status_value" class="form-control @error('edit_status_value') is-invalid @enderror" id="edit_status_value"  cols="10" rows="5" value=""></textarea>
                                     @error('edit_status_value')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>

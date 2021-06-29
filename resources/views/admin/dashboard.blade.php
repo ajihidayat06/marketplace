@@ -12,6 +12,11 @@
 
     <div class="col-md-10 offset-2">
         <div class="container">
+            @if (session('success'))
+                <div class="alert alert-success" role="alert">
+                    {{session('success')}}
+                </div>
+            @endif
             <div class="row">
 
                 <div class="card-deck">
@@ -95,6 +100,9 @@
                                 <div class="col-md-8">
                                     <div >
                                         <span>Jumlah Transaksi : <strong>{{$laporan}}</strong></span>
+                                    </div>
+                                    <div >
+                                        <span>Transaksi Bulan Ini : <strong>{{$transaksi_bulan_ini->count()}}</strong></span>
                                         
                                     </div>
                                 </div>
@@ -103,11 +111,56 @@
                     </div>
 
                 </div>
+
                 
+            </div>
+
+            <div class="mt-3">
+                <h5 class="text-secondary">Biaya Layanan / Transaksi :</h5>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <h2>Rp {{number_format($biaya_layanan->biaya, 2,",",".")}}</h2>
+                        </div>
+                        <div class="col-md-1">
+                            <a href="" data-toggle="modal" data-target="#UbahBiaya"><i class="far fa-edit"></i> Ubah</a> 
+                        </div>
+                    </div>
+                </div>
             </div>
 
             <div class="panel mt-5" id="tampilchart">
 
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="UbahBiaya" tabindex="-1" role="dialog" aria-labelledby="UbahBiaya" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle" style="color: #11647A">Ubah Biaya Layanan</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                </div>
+                <div class="modal-body">
+                    <form action="{{ route('ubah_biaya_layanan') }}" method="POST" enctype="multipart/form-data">
+                        {{ csrf_field() }}
+                        <input type="hidden" name="id_biaya" id="id_biaya" value="{{ $biaya_layanan->id }}">
+                        <div class="mb-3">
+                            <label for="biaya" class="text-secondary">Biaya Layanan</label>
+                            <input type="text" name="biaya_layanan" id="biaya" class="form-control @error('biaya_layanan') is-invalid @enderror" value="{{ $biaya_layanan->biaya }}">
+                            @error('biaya_layanan')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Simpan</button>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
